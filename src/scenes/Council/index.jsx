@@ -219,6 +219,7 @@ const Team = () => {
       setLoading1(true)
       setTimeout(() => {
         setLoading1(false)
+        console.log(selectedFile1)
         axios.post(`${url}create-dept`, {
             departmentImg: selectedFile1,
             departmentName: departmentName,
@@ -342,9 +343,9 @@ const Team = () => {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         <GridToolbarExport />
-        <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
+        {/* <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
           Add
-        </Button>
+        </Button> */}
 
       </GridToolbarContainer>
     );
@@ -362,8 +363,14 @@ const Team = () => {
       e,
     );
     axios.post(`${url}upload-image`, formData,
-      { headers }).then(response => {
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    }).then(response => {
+        console.log('response.data')
         console.log(response.data)
+
         setSelectedFile1(response.data)
 
       })

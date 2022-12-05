@@ -46,6 +46,8 @@ function App() {
               <Route path="/home" element={<Dashboard />} />
               <Route path="/membershipRequests" element={<MembershipReq />} />
               <Route path="/membershipRequestsView" element={<MembershipReqView />} />
+              {/* <Route path="/reportsDataView" element={<MembershipReqView />} /> */}
+
               <Route path="/manageMembers" element={<ManageMembers />} />
               <Route path="/library" element={<Library />} />
               <Route path="/monthlyReports" element={<MonthlyReportData />} />

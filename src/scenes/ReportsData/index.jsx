@@ -34,7 +34,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import url from "../url"
 // import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
@@ -58,7 +58,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '80%',
   bgcolor: 'beige',
   borderRadius: '10px',
   padding: "0px 40px 40px 40px",
@@ -130,6 +130,14 @@ const Team = () => {
   const colors = tokens(theme.palette.mode);
   const [EditFieldData, setEditFieldData] = useState([]);
   const [image, setimage] = useState([]);
+  const [title, setTitle] = useState('');
+  const [reportBy, setReportBy] = useState('');
+  const [eventCategory, setEventCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [eventDate, setEventDate] = useState('');
+
+
   const [email, setemail] = useState([]);
   const [gender, setgender] = useState([]);
   const [dob, setdob] = useState([]);
@@ -150,7 +158,7 @@ const Team = () => {
   const handleCloseUpdate = () => setOpenUpdate(false);
   // Delete 
   const [visibleDelete, setVisibleDelete] = useState(false)
-   // Delete 
+  // Delete 
   // Alert 
   const deleteData = (id) => {
     console.log('deleting User')
@@ -226,24 +234,26 @@ const Team = () => {
       });
   };
   // Submit 
-  const submitHandler = async (e) => {
-    e.preventDefault()
+  const submitHandler = async () => {
+    // e.preventDefault()
     // Axios image
-    const formData = new FormData()
-    formData.append('image', image)
-    axios.post(`${url}upload-image`,
-      formData).then(response => {
-        console.log(response.data)
+    // const formData = new FormData()
+    // formData.append('image', image)
+    // axios.post(`${url}upload-image`,
+    //   formData).then(response => {
+    //     console.log(response.data)
 
 
-        axios.post(`${url}create-request`, {
+        axios.post(`${url}create-report`, {
           // id:1,
-          image: response.data,
-          email: email,
-          name: name1,
-          gender: gender,
-          dob: dob,
-          profession: profession,
+          title: title,
+          reportBy: reportBy,
+          eventCategory: eventCategory,
+          description: description,
+          location: location,
+          date: eventDate,
+          time:eventDate,
+          images:selectedFile1
 
         }, { headers }).then(response => {
           console.log(response)
@@ -252,7 +262,7 @@ const Team = () => {
 
           let timerInterval
           Swal.fire({
-            title: 'Created Member Successfully',
+            title: 'Created Report Successfully',
             timer: 2000,
             timerProgressBar: true,
             didOpen: () => {
@@ -275,7 +285,7 @@ const Team = () => {
           .catch(err => {
             console.log(err)
           })
-      })
+      // })
 
 
   }
@@ -310,7 +320,7 @@ const Team = () => {
       headerName: "userType",
       flex: 1,
     },
-  
+
     // {
     //   field: "approvalStatus",
     //   headerName: "Action",
@@ -399,8 +409,40 @@ const Team = () => {
       </GridToolbarContainer>
     );
   }
+  const [selectedFile1, setSelectedFile1] = useState('')
+  const onFileChange = (e) => {
+    console.log(e.files)
+    const formData = new FormData();
+    let arrayOfYourFiles = e.files;
+    // create formData object
+    // e.forEach(file=>{
+    //   formData.append("images", file);
+    // });
+    for (let i = 0; i < arrayOfYourFiles.length; i++) {
+      formData.append('images', arrayOfYourFiles[i]);
+    }
+    //     // formData.append(
+    //     //   "images",
+    //     //   e,
+    //     // );
+    axios.post(`${url}upload-multiple-images`, formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      }).then(response => {
+        console.log('response.data')
+        console.log(response.data)
+
+        // setSelectedFile1(response.data)
+
+      })
+
+  }
   //Get API Axios
   const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const getAllData = () => {
     axios.get(`${url}get-all-report`).then((response) => {
@@ -412,8 +454,20 @@ const Team = () => {
       .catch(error => console.error(`Error:${error}`));
 
   }
+  const getAllDataUsers = () => {
+    axios.get(`${url}get-all-users`).then((response) => {
+      const allData = response.data;
+      console.log(allData);
+      setUsers(response.data);
+      // setLoading(false)
+    })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  
   useEffect(() => {
     getAllData();
+    getAllDataUsers()
     // getAllDataUnapprove();
     // getAllDataApprove();
 
@@ -443,49 +497,49 @@ const Team = () => {
 
           </Box> */}
           {/* <TabPanel value={value} index={0}> */}
-            <Box
-              m="5px 0 0 0"
-              height="75vh"
-              sx={{
-                "& .MuiDataGrid-root": {
-                  border: "none",
-                },
-                "& .MuiDataGrid-cell": {
-                  borderBottom: "none",
-                },
-                "& .name-column--cell": {
-                  color: colors.greenAccent[300],
-                },
-                "& .MuiDataGrid-columnHeaders": {
-                  backgroundColor: "#52ad4a",
-                  borderBottom: "none",
-                },
-                "& .MuiDataGrid-virtualScroller": {
-                  backgroundColor: colors.primary[400],
-                },
-                "& .MuiDataGrid-footerContainer": {
-                  borderTop: "none",
-                  backgroundColor: "#52ad4a",
-                },
-                "& .MuiCheckbox-root": {
-                  color: `${colors.greenAccent[200]} !important`,
-                },
-              }}
-            >
-              <DataGrid
-                // {...data}
+          <Box
+            m="5px 0 0 0"
+            height="75vh"
+            sx={{
+              "& .MuiDataGrid-root": {
+                border: "none",
+              },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[300],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: "#52ad4a",
+                borderBottom: "none",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: "#52ad4a",
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+            <DataGrid
+              // {...data}
 
-                rows={data}
-                columns={columns}
-                getRowId={(row) => row._id}
-                loading={loading}
-                components={{
-                  Toolbar: CustomToolbar,
-                }}
-              />
-            </Box>
+              rows={data}
+              columns={columns}
+              getRowId={(row) => row._id}
+              loading={loading}
+              components={{
+                Toolbar: CustomToolbar,
+              }}
+            />
+          </Box>
           {/* </TabPanel> */}
-       
+
         </Box>
 
         {/* Add  */}
@@ -509,58 +563,84 @@ const Team = () => {
                 </Typography> */}
                 <Grid container spacing={2} >
                   <Grid item xs={12} md={12} mt>
-                  <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
-                      Add Membership Request
+                    <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
+                      Add Report
                     </Typography>
-</Grid>
-<Grid item xs={12} md={6}>
+                  </Grid>
+                  <Grid item xs={12} md={2}>
 
                     <Typography mt={2} variant="h5" style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Image
+                      Images
                     </Typography>
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    <input type="file" name="image" placeholder="image"
-                      onChange={(e) => setimage(e.target.files[0])} />
+                  <Grid item xs={12} md={4}>
+                    <input type="file" style={{marginTop:'20px'}} name="image" placeholder="image" multiple
+                      onChange={(e) => onFileChange(e.target.files)} />
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Email
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Title
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} md={3}>
                     {/* <input type="text" name="name" placeholder="Enter Email"
                       value={email}
                       onChange={(e) => setemail(e.target.value)
                       }
                     /> */}
-                     <TextField  value={email}
-                      onChange={(e) => setemail(e.target.value)
-                      }id="filled-basic" label="Enter Email" variant="filled" />
+                    <TextField value={title}
+                      onChange={(e) => setTitle(e.target.value)
+                      } id="filled-basic" label="Enter Title" variant="filled" />
                   </Grid>
 
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Name
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Report By
                     </Typography>
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                                         <TextField   value={name1}
-                      onChange={(e) => setname1(e.target.value)
-                      } id="filled-basic" label="Enter Name" variant="filled" />
+                  <Grid item xs={12} md={3}>
+                    
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Select User</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={reportBy}
+                        label="Report By"
+                        onChange={(e) => setReportBy(e.target.value)}
+                      >
+                         { users.map((row) => (
+                                                                    <MenuItem value={row._id}>{row.name}</MenuItem>
+                                                                ))}
+
+
+                      </Select>
+                    </FormControl>
+
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Profession
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Event Category
                     </Typography>
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                     <TextField  value={profession}
-                      onChange={(e) => setprofession(e.target.value)
-                      }id="filled-basic" label="Enter Profession" variant="filled" />
+                  <Grid item xs={12} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={eventCategory}
+                        label="Event Category"
+                        onChange={(e) => setEventCategory(e.target.value)}
+                      >
+                        <MenuItem value='Public'>Public</MenuItem>
+                        <MenuItem value='Private'>Private</MenuItem>
+
+                      </Select>
+                    </FormControl>
                   </Grid>
 
                   {/* <Grid item xs={12} md={6}>
@@ -583,32 +663,54 @@ const Team = () => {
                             </LocalizationProvider>
                           </Grid> */}
 
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Select Gender
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Description
                     </Typography>
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={gender}
-                        label="Gender"
-                        onChange={(e) => setgender(e.target.value)}
-                      >
-                        <MenuItem value='Male'>Male</MenuItem>
-                        <MenuItem value='Female'>Female</MenuItem>
+                  <Grid item xs={12} md={3}>
+                    <TextareaAutosize
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      maxRows={4}
+                      aria-label="maximum height"
+                      placeholder="Description"
+                      style={{ width: '100%',height:'70px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Location
+                    </Typography>
 
-                      </Select>
-                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={3}>
+                    <TextareaAutosize
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      maxRows={4}
+                      aria-label="maximum height"
+                      placeholder="Location Address"
+                      style={{ width: '100%',height:'70px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={3}>
+                    <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
+                      Select Date of Event
+                    </Typography>
+
+                  </Grid>
+                  <Grid item xs={12} md={3}>
+                  <input type="date"
+                      value={eventDate}
+                      onChange={(e) => setEventDate(e.target.value)}
+                       id="birthday" name="birthday" style={{ width: '87%', height: '50px', border: 'none', borderBottom: '1px solid #a4a493', backgroundColor: '#e7e7cf' }} />
                   </Grid>
 
                   <Grid item xs={12} md={12} align="center">
                     {/* <button type='submit'>Submit</button> */}
-                    <Button variant="contained" style={{backgroundColor:'#52ad4a'}} onClick={() => handleCloseUpdate()}>
+                    <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler()}>
                       Submit
                     </Button>
                   </Grid>
