@@ -62,7 +62,7 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
   const getAllData = async () => {
     const phoneNo = state.post_id;
-    await axios.get(`${url}get-request`, {
+    await axios.get(`${url}get-event`, {
         params: {
             _id: phoneNo
         }
@@ -91,8 +91,8 @@ const Team = () => {
           <Link underline="hover" color="inherit" href="/">
             <HomeIcon />
           </Link>
-          <Link underline="hover" color="inherit" href="/membershipRequests">
-            <Typography color="text.primary">Membership Requests</Typography>
+          <Link underline="hover" color="inherit" href="/events">
+            <Typography color="text.primary">Events</Typography>
 
           </Link>
 
@@ -115,7 +115,7 @@ const Team = () => {
                       sx={{ display: 'flex', p: 1, borderRadius: 1 }}
                     >
                       <Item sx={{ flexGrow: 1 }}>
-                        <Typography variant='h3' style={{ fontFamily: 'Roboto, sans-serif', }}>Request Details</Typography>
+                        <Typography variant='h3' style={{ fontFamily: 'Roboto, sans-serif', }}>Event Details</Typography>
                       </Item>
                     </Box>
                   </Grid>
@@ -125,11 +125,11 @@ const Team = () => {
                     <TableContainer >
                       <Table sx={{ minWidth: 650 }} aria-label="simple table" >
                         <TableBody>
-                          {/* <TableRow
+                          <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Image
+                              Images
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
@@ -137,16 +137,16 @@ const Team = () => {
 
                             </TableCell>
 
-                          </TableRow> */}
+                          </TableRow>
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Name
+                              Event Id
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.name}
+                              {data.eventId}
 
                             </TableCell>
 
@@ -155,11 +155,24 @@ const Team = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Gender
+                              Title
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.gender}
+                              {data.title}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              department
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                              {data.department}
 
                             </TableCell>
 
@@ -169,11 +182,11 @@ const Team = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Email
+                            Category
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.email}
+                              {data.category}
 
                             </TableCell>
 
@@ -182,11 +195,11 @@ const Team = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Date of Birth
+                            location
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.dob}
+                              {data.location}
 
                             </TableCell>
 
@@ -196,107 +209,16 @@ const Team = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
-                              Profession
+                            date
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.profession}
+                              {data.date}
 
                             </TableCell>
 
                           </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                              Educationsl institute
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.nameOfEducationalInstitution}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Permanent Address
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.permanentAddress}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Phone No Cell
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.phoneNoCell}
-
-                            </TableCell>
-
-                          </TableRow>
-                        
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Postal Address
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.postalAddress}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Provincial Constituency No
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.provincialConstituencyNo}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Tehsil Permanent Address
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.tehsilPermanentAddress}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Desired Forum
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.DesiredForum}
-
-                            </TableCell>
-
-                          </TableRow>
+                       
                           {/* Row  */}
                           {/* Second row  */}
 

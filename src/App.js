@@ -1,21 +1,10 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
-import Team from "./scenes/team";
-import Contacts from "./scenes/contacts";
-import Bar from "./scenes/bar";
-import Form from "./scenes/form";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Geography from "./scenes/geography"
-import Calendar from "./scenes/calendar/calendar";
-import AdminUsers from "./scenes/adminusers"
-import PaymentData from "./scenes/paymentData"
 import LoginPage from "./scenes/loginPage/login"
 import MembershipReq from "./scenes/membershipReq"
 import MembershipReqView from "./scenes/memberReqView"
@@ -27,18 +16,32 @@ import Council from "./scenes/Council"
 import Meetings from "./scenes/meetings"
 import Events from "./scenes/events"
 import ReportsDataView from "./scenes/reportsDataView"
+import EventView from "./scenes/eventView"
+import ManageMembersView from "./scenes/manageMembersView"
+import PdfViewer from "./scenes/pdfView"
+import SettingsData from "./scenes/settingsData"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (window.location.pathname === '/') {
+      setIsSidebar(false)
+    }
+  }, []);
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
+          {pathname === '/' ? null :
+            <Sidebar isSidebar={isSidebar} />
+          }
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            {pathname === '/' ? null :
+              <Topbar setIsSidebar={setIsSidebar} />
+
+            }
             <Routes>
 
               <Route path="/" element={<LoginPage />} />
@@ -49,6 +52,8 @@ function App() {
               {/* <Route path="/reportsDataView" element={<MembershipReqView />} /> */}
 
               <Route path="/manageMembers" element={<ManageMembers />} />
+              <Route path="/manageMembersView" element={<ManageMembersView />} />
+
               <Route path="/library" element={<Library />} />
               <Route path="/monthlyReports" element={<MonthlyReportData />} />
               <Route path="/reportsData" element={<ReportsData />} />
@@ -56,6 +61,11 @@ function App() {
               <Route path="/meetings" element={<Meetings />} />
               <Route path="/events" element={<Events />} />
               <Route path="/reportsView" element={<ReportsDataView />} />
+              
+              <Route path="/eventView" element={<EventView />} />
+              <Route path="/pdfView" element={<PdfViewer />} />
+              <Route path="/settings" element={<SettingsData />} />
+
 
 
 

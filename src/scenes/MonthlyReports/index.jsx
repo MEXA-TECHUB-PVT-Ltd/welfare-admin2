@@ -1,15 +1,8 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
 import Select from '@mui/material/Select';
-
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
@@ -19,18 +12,13 @@ import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '@mui/material/Modal';
 import DoneIcon from '@mui/icons-material/Done';
-import Tooltip from '@mui/material/Tooltip';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios'
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import Swal from 'sweetalert2'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -41,16 +29,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from '@mui/material/TableContainer';
 import url from "../url"
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import ClipLoader from "react-spinners/ClipLoader";
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
-  GridToolbarExport,
-  GridToolbarDensitySelector,
-} from '@mui/x-data-grid';
 import React, { useState, useEffect } from "react";
 
 const style = {
@@ -85,12 +63,7 @@ const addbtn = {
   cursor: 'pointer'
 
 }
-const override = {
-  display: ' block',
-  margin: '0 auto',
-  //   borderColor: 'red',
-}
-const color = "black"
+
 const TextColor1 = {
   color: 'black',
   fontFamily: 'Roboto, sans-serif',
@@ -137,36 +110,15 @@ const TabsStyle = {
 const Team = () => {
   // Tabs value
   const navigate = useNavigate();
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const headers = {
     'Content-Type': 'application/json'
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [EditFieldData, setEditFieldData] = useState([]);
-  const [image, setimage] = useState([]);
-  const [email, setemail] = useState([]);
-  const [gender, setgender] = useState([]);
-  const [dob, setdob] = useState([]);
-  const [name1, setname1] = useState([]);
-  const [profession, setprofession] = useState([]);
-  // Approve 
   const [openAdd, setOpenAdd] = React.useState(false);
-  const handleOpenAdd = () => {
-    setOpenAdd(true);
-  }
   const handleCloseAdd = () => setOpenAdd(false);
   // Update 
   const [openUpdate, setOpenUpdate] = React.useState(false);
-  const handleOpenUpdate = (row) => {
-    setOpenUpdate(true);
-    console.log(row)
-  }
   const handleCloseUpdate = () => setOpenUpdate(false);
   // Delete 
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -260,7 +212,6 @@ const Team = () => {
   const [MonthlyMeeting, setMonthlyMeeting] = useState([]);
   const [TrainingSession, setTrainingSession] = useState([]);
   const [created_date, setcreated_date] = useState(new Date());
-  const [sortByDate, setSortByDate] = useState(new Date());
   // Submit 
   const submitHandler = async () => {
     // Loader 
@@ -435,7 +386,7 @@ const Team = () => {
     <>
       <Box display="flex" justifyContent="space-between" p={2} style={{ borderBottom: '1px solid #adadad' }}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
 

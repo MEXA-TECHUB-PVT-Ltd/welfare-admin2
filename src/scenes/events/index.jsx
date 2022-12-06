@@ -1,16 +1,8 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
 import Select from '@mui/material/Select';
-
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,10 +16,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios'
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import Swal from 'sweetalert2'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -35,15 +24,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-
 import url from "../url"
-// import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
-
-// import MDButton from "../../components/MDButton";
-
-
-// import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -132,20 +113,12 @@ const Team = () => {
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [EditFieldData, setEditFieldData] = useState([]);
-  const [image, setimage] = useState([]);
   const [title, setTitle] = useState('');
   const [reportBy, setReportBy] = useState('');
   const [eventCategory, setEventCategory] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [eventDate, setEventDate] = useState('');
-
-  const [email, setemail] = useState([]);
-  const [gender, setgender] = useState([]);
-  const [dob, setdob] = useState([]);
-  const [name1, setname1] = useState([]);
-  const [profession, setprofession] = useState([]);
   // Approve 
   const [openAdd, setOpenAdd] = React.useState(false);
   const handleOpenAdd = () => {
@@ -237,17 +210,9 @@ const Team = () => {
   };
   // Submit 
   const submitHandler = async () => {
-    // // Axios image
-    // const formData = new FormData()
-    // formData.append('image', image)
-    // axios.post(`${url}upload-image`,
-    //   formData).then(response => {
-    //     console.log(response.data)
-
-
         axios.post(`${url}create-event`, {
           // id:1,
-          // images: image,
+          images:selectedFile1,
           title: title,
           description: description,
           location: location,
@@ -280,6 +245,13 @@ const Team = () => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
               console.log('I was closed by the timer')
+              setSelectedFile1([]);
+              setTitle('');
+              setDescription('');
+              setLocation('');
+              setEventDate('');
+              setEventCategory('');
+              setReportBy('')
             }
           })
         })
@@ -293,7 +265,7 @@ const Team = () => {
   const columns = [
     // { field: "_id", headerName: "ID" },
     {
-      field: "departmentImg",
+      field: "images",
       headerName: "Image",
       flex: 1,
       renderCell: (row) => {
@@ -306,6 +278,18 @@ const Team = () => {
         
         );
       },
+    },
+    {
+      field: "title",
+      headerName: "Title",
+      flex: 1,
+      // cellClassName: "name-column--cell",
+    },
+    {
+      field: "department",
+      headerName: "Department",
+      flex: 1,
+      // cellClassName: "name-column--cell",
     },
     {
       field: "category",
@@ -328,25 +312,7 @@ const Team = () => {
       renderCell: (row) => {
         return (
           <>
-            {/* {row.row.approvalStatus ?
-              <IconButton onClick={() => checkbox1(row.row._id)}>
-                <Tooltip title="Unapprove">
-               UnApprove
-                </Tooltip>
-              </IconButton>
-              :
-              <IconButton onClick={() => checkbox(row.row._id)}>
-                <Tooltip title="Approve">
-                 Approve
-                </Tooltip>
-              </IconButton>
-            } */}
-            {/* className */}
-            {/* <IconButton onClick={() => handleOpenUpdate()}>
-              <Tooltip title="Edit">
-                <EditIcon />
-              </Tooltip>
-            </IconButton> */}
+          
             <IconButton onClick={() => handleClickOpen(row.row._id)}>
               <Tooltip title="View">
                 <VisibilityIcon />
@@ -373,9 +339,9 @@ const Team = () => {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         <GridToolbarExport />
-        <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
+        {/* <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
           Add
-        </Button>
+        </Button> */}
 
       </GridToolbarContainer>
     );
@@ -393,7 +359,7 @@ const Team = () => {
         const allData = response.data;
         console.log(allData);
         setData(response.data);
-        setimagesdata(response.data.images);
+        // setimagesdata(response.data.images);
         setLoading(false)
       })
       .catch(error => console.error(`Error:${error}`));
@@ -420,11 +386,38 @@ const Team = () => {
     // getAllDataApprove();
 
   }, []);
+  const [selectedFile1, setSelectedFile1] = useState('')
+  const onFileChange = (e) => {
+    console.log(e)
+    const ProductImg = e;
+    console.log('ProductImg')
+
+    console.log(ProductImg)
+    const formData = new FormData();
+
+    for (let i = 0; i < ProductImg.length; i++) {
+      formData.append('images', ProductImg[i]);
+      console.log(ProductImg[i]);
+    }
+
+
+    axios.post(`${url}upload-multiple-images`, formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(response => {
+        console.log(response.data.images)
+        setSelectedFile1(response.data.images)
+
+      })
+
+  }
   return (
     <>
       <Box display="flex" justifyContent="space-between" p={2} style={{ borderBottom: '1px solid #adadad' }}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
 
@@ -433,7 +426,18 @@ const Team = () => {
 
       </Box>
       <Box m="20px">
+      <Grid container spacing={2} >
+          <Grid item xs={12} md={10} mt>
         <Header title="Events" subtitle="Managing the Events" />
+
+            </Grid>
+            <Grid item xs={12} md={2} mt>
+            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => handleOpenAdd()}>
+              Add
+            </Button>
+
+          </Grid>
+            </Grid>
 
         <Box sx={{ width: '100%' }}>
           {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -524,7 +528,7 @@ const Team = () => {
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <input type="file" style={{marginTop:'20px'}} name="image" placeholder="image" multiple
-                      onChange={(e) => setimage(e.target.files[0])} />
+                      onChange={(e) => onFileChange(e.target.files)} />
                   </Grid>
                   <Grid item xs={12} md={3}>
                   <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>

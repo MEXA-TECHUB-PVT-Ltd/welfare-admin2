@@ -88,7 +88,7 @@ const Team = () => {
       <Grid container spacing={2} >
               <Grid item xs={12} md={12} >
               <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
           <Link underline="hover" color="inherit" href="/membershipRequests">
