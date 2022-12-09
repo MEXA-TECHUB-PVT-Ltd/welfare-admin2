@@ -57,8 +57,9 @@ const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
+  overflowY: 'scroll',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '80%',
   bgcolor: 'beige',
   borderRadius: '10px',
   padding: "0px 40px 40px 40px",
@@ -68,6 +69,7 @@ const style = {
 const style1 = {
   position: 'absolute',
   top: '50%',
+  overflowY: 'scroll',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
@@ -128,51 +130,90 @@ const Team = () => {
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [districtAll, setDistrictAll] = useState([]);
+  const [PPAll, setPPAll] = useState([]);
+  const [UCAll, setUCAll] = useState([]);
+  const [UnitAll, setUnitAll] = useState([]);
   const [EditFieldData, setEditFieldData] = useState([]);
   const [image, setimage] = useState([]);
   const [email, setemail] = useState([]);
   const [gender, setgender] = useState([]);
-  const [dob, setdob] = useState([]);
-  const [name1, setname1] = useState([]);
+  const [dob, setDob] = useState([]);
+  const [name, setName] = useState([]);
   const [profession, setprofession] = useState([]);
+  const [userType, setuserType] = useState('')
+  const [DistrictArea, setDistrictArea] = useState('')
+  const [forum, setforum] = useState('')
+  const [role, setrole] = useState('')
+  const [department, setdepartment] = useState('')
+  const [PPArea, setPPArea] = useState('')
+  const [UCArea, setUCArea] = useState('')
+  const [UnitArea, setUnitArea] = useState('')
+  const [IdData, setIdData] = useState('')
   // Approve 
+  const [password, setPassword] = useState('');
+
   const checkbox = (Did) => {
     console.log(Did);
-    axios.put(`${url}update-approval-status`, {
-      _id: Did,
-      approvalStatus: 'true'
-    }, { headers }).then(response => {
+setIdData(Did)
+    axios.get(`${url}get-request`, {
+      params: {
+        _id: Did
+      }
+    }).then(response => {
+      console.log('response')
       console.log(response);
-      console.log('working fine')
-      let timerInterval
-      Swal.fire({
-        title: 'Please wait!',
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
-      })
-      //    refresh componenet 
-      getAllData();
-      getAllDataUnapprove();
-      getAllDataApprove();
+      setemail(response.data.email)
+      setgender(response.data.gender)
+      setName(response.data.name)
+      setDob(response.data.dob)
+      setprofession(response.data.profession)
+      // setData(response.data);
+      // console.log(re);
+      // setLoading(false)
+      setOpenAdd(true)
+
     })
       .catch(err => {
         console.log(err)
       })
+
+    // axios.put(`${url}update-approval-status`, {
+    //   _id: Did,
+    //   approvalStatus: 'true'
+    // }, { headers }).then(response => {
+    //   console.log(response);
+    //   console.log('working fine')
+    //   let timerInterval
+    //   Swal.fire({
+    //     title: 'Please wait!',
+    //     timer: 2000,
+    //     timerProgressBar: true,
+    //     didOpen: () => {
+    //       Swal.showLoading()
+    //       const b = Swal.getHtmlContainer().querySelector('b')
+    //       timerInterval = setInterval(() => {
+    //         b.textContent = Swal.getTimerLeft()
+    //       }, 100)
+    //     },
+    //     willClose: () => {
+    //       clearInterval(timerInterval)
+    //     }
+    //   }).then((result) => {
+    //     /* Read more about handling dismissals below */
+    //     if (result.dismiss === Swal.DismissReason.timer) {
+    //       console.log('I was closed by the timer')
+    //       setOpenAdd(true)
+    //     }
+    //   })
+    //   //    refresh componenet 
+    //   getAllData();
+    //   getAllDataUnapprove();
+    //   getAllDataApprove();
+    // })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   }
 
   const checkbox1 = (Did) => {
@@ -201,7 +242,10 @@ const Team = () => {
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
+          console.log('I was closed by the timer111')
+          // add member
+
+
         }
       })
       //    refresh componenet 
@@ -222,6 +266,70 @@ const Team = () => {
   }
   const handleCloseAdd = () => setOpenAdd(false);
   const submitHandler1 = () => {
+    axios.post(`${url}create-user`, {
+      // id:1,
+      name: name,
+      email: email,
+      dob: dob,
+      password: password,
+      profession: profession,
+      role: role,
+      userType: userType,
+      DistrictArea: DistrictArea,
+      PPArea: PPArea,
+      UCArea: UCArea,
+      UnitArea: UnitArea,
+      forum: forum,
+      department: department,
+      approvalStatus: true
+    }, { headers }).then(response => {
+      console.log(response)
+      setOpenAdd(false);
+      // Membership Req approved 
+       axios.put(`${url}update-approval-status`, {
+      _id: IdData,
+      approvalStatus: 'true'
+    }, { headers }).then(response => {
+      console.log(response);
+      console.log('working fine')
+      
+      //    refresh componenet 
+      getAllData();
+      getAllDataUnapprove();
+      getAllDataApprove();
+    })
+      .catch(err => {
+        console.log(err)
+      })
+
+      let timerInterval
+      Swal.fire({
+        title: 'Created and Approved Request Successfully',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+          getAllData();
+          getAllDataApprove();
+          getAllDataUnapprove();
+        }
+      })
+    })
+      .catch(err => {
+        console.log(err)
+      })
     // if(SubscriptionNameAdd===''||SubscriptionShopsAdd===''||SubscriptionPriceAdd===''){
     //     setSuccessSBVV(true)
     // }else{
@@ -330,59 +438,59 @@ const Team = () => {
       });
   };
   // Submit 
-  const submitHandler = async (e) => {
-    e.preventDefault()
-    // Axios image
-    const formData = new FormData()
-    formData.append('image', image)
-    axios.post(`${url}upload-image`,
-      formData).then(response => {
-        console.log(response.data)
+  // const submitHandler = async (e) => {
+  //   e.preventDefault()
+  //   // Axios image
+  //   const formData = new FormData()
+  //   formData.append('image', image)
+  //   axios.post(`${url}upload-image`,
+  //     formData).then(response => {
+  //       console.log(response.data)
 
 
-        axios.post(`${url}create-request`, {
-          // id:1,
-          image: response.data,
-          email: email,
-          name: name1,
-          gender: gender,
-          dob: dob,
-          profession: profession,
+  //       axios.post(`${url}create-request`, {
+  //         // id:1,
+  //         image: response.data,
+  //         email: email,
+  //         name: name,
+  //         gender: gender,
+  //         dob: dob,
+  //         profession: profession,
 
-        }, { headers }).then(response => {
-          console.log(response)
-          setOpenAdd(false);
-          setData([...data, response.data]);
+  //       }, { headers }).then(response => {
+  //         console.log(response)
+  //         setOpenAdd(false);
+  //         setData([...data, response.data]);
 
-          let timerInterval
-          Swal.fire({
-            title: 'Created Member Successfully',
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading()
-              const b = Swal.getHtmlContainer().querySelector('b')
-              timerInterval = setInterval(() => {
-                b.textContent = Swal.getTimerLeft()
-              }, 100)
-            },
-            willClose: () => {
-              clearInterval(timerInterval)
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log('I was closed by the timer')
-            }
-          })
-        })
-          .catch(err => {
-            console.log(err)
-          })
-      })
+  //         let timerInterval
+  //         Swal.fire({
+  //           title: 'Created Member Successfully',
+  //           timer: 2000,
+  //           timerProgressBar: true,
+  //           didOpen: () => {
+  //             Swal.showLoading()
+  //             const b = Swal.getHtmlContainer().querySelector('b')
+  //             timerInterval = setInterval(() => {
+  //               b.textContent = Swal.getTimerLeft()
+  //             }, 100)
+  //           },
+  //           willClose: () => {
+  //             clearInterval(timerInterval)
+  //           }
+  //         }).then((result) => {
+  //           /* Read more about handling dismissals below */
+  //           if (result.dismiss === Swal.DismissReason.timer) {
+  //             console.log('I was closed by the timer')
+  //           }
+  //         })
+  //       })
+  //         .catch(err => {
+  //           console.log(err)
+  //         })
+  //     })
 
 
-  }
+  // }
   const columns = [
     // { field: "_id", headerName: "ID" },
     {
@@ -410,7 +518,7 @@ const Team = () => {
     },
     {
       field: "approvalStatus",
-      headerName: "Action",
+      headerName: "Approval Status",
       flex: 1,
       renderCell: (row) => {
         return (
@@ -489,15 +597,17 @@ const Team = () => {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         <GridToolbarExport />
-        <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
+        {/* <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
           Add
-        </Button>
+        </Button> */}
 
       </GridToolbarContainer>
     );
   }
   //Get API Axios
   const [data, setData] = useState([]);
+  const [dataDept, setDataDept] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const getAllData = () => {
     axios.get(`${url}get-all-requests`)
@@ -543,10 +653,71 @@ const Team = () => {
   //   rowLength: 4,
   //   maxColumns: 6,
   // });
+  const getAllDataDept = () => {
+    axios.get(`${url}get-all`)
+      .then((response) => {
+        const allData = response.data;
+        console.log(allData);
+        setDataDept(response.data);
+        // setimagesdata(response.data.images);
+
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  const getAllDataDistrict = () => {
+    axios.get(`${url}get-all-district`)
+      .then((response) => {
+        const allData = response.data;
+        console.log(allData);
+        setDistrictAll(response.data);
+
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  const getAllDataPP = () => {
+    axios.get(`${url}get-all-pp`)
+      .then((response) => {
+        const allData = response.data;
+        console.log(allData);
+        setPPAll(response.data);
+
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  const getAllDataUC = () => {
+    axios.get(`${url}get-all-uc`)
+      .then((response) => {
+        const allData = response.data;
+        console.log(allData);
+        setUCAll(response.data);
+
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  const getAllDataUnit = () => {
+    axios.get(`${url}get-all-unit`)
+      .then((response) => {
+        const allData = response.data;
+        console.log(allData);
+        setUnitAll(response.data);
+
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
   useEffect(() => {
     getAllData();
     getAllDataUnapprove();
     getAllDataApprove();
+    getAllDataDept();
+    getAllDataDistrict();
+    getAllDataPP();
+    getAllDataUC();
+    getAllDataUnit();
 
   }, []);
   return (
@@ -562,7 +733,16 @@ const Team = () => {
 
       </Box>
       <Box m="20px">
+      <Grid container spacing={2} >
+          <Grid item xs={12} md={10} mt>
         <Header title="Membership Requests" subtitle="Managing the Membership Requests" />
+
+            </Grid>
+        <Grid item xs={12} md={2} mt> 
+          <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('http://teamsuit.co/welfare/membership.php')}>
+          Add
+        </Button></Grid>
+        </Grid>
 
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -720,111 +900,275 @@ const Team = () => {
             <Fade in={openAdd}>
               <Box sx={style}>
 
-                {/* <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                  Add Membership Request
-                </Typography> */}
+
                 <Grid container spacing={2} >
                   <Grid item xs={12} md={12} mt>
-                  <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
-                      Add Membership Request
+                    <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
+                      Add Member
                     </Typography>
-</Grid>
-<Grid item xs={12} md={6}>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Name :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <TextField
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      disabled
+                      style={{ width: '100%' }} variant="outlined" />
 
-                    <Typography mt={2} variant="h5" style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Image
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Password :
                     </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <TextField
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" />
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    <input type="file" name="image" placeholder="image"
-                      onChange={(e) => setimage(e.target.files[0])} />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Email
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Email :
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    {/* <input type="text" name="name" placeholder="Enter Email"
+                  <Grid item xs={6} md={3}>
+                    <TextField
+                      disabled
                       value={email}
-                      onChange={(e) => setemail(e.target.value)
-                      }
-                    /> */}
-                     <TextField  value={email}
-                      onChange={(e) => setemail(e.target.value)
-                      }id="filled-basic" label="Enter Email" variant="filled" />
-                  </Grid>
+                      onChange={(e) => setemail(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" />
 
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Name
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Dob :
                     </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <TextField
+                      value={dob}
+                      disabled
+                      // type="number"
+                      onChange={(e) => setDob(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" />
 
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                                         <TextField   value={name1}
-                      onChange={(e) => setname1(e.target.value)
-                      } id="filled-basic" label="Enter Name" variant="filled" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Profession
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Forum :
                     </Typography>
-
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                     <TextField  value={profession}
-                      onChange={(e) => setprofession(e.target.value)
-                      }id="filled-basic" label="Enter Profession" variant="filled" />
-                  </Grid>
-
-                  {/* <Grid item xs={12} md={6}>
-                            <div >
-                              Select Date of Birth
-                            </div>
-
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                              <DateTimePicker
-                                renderInput={(props) => <TextField {...props} />}
-                                label="DOB"
-                                value={dob}
-                                onChange={(newValue) => {
-                                  setdob(newValue);
-                                }}
-                              />
-                            </LocalizationProvider>
-                          </Grid> */}
-
-                  <Grid item xs={12} md={6}>
-                  <Typography variant="h5" mt={2} style={{ color: '#7e7e7e', fontWeight: 700 }} gutterBottom>
-                      Select Gender
-                    </Typography>
-
-                  </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={6} md={3}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                      <InputLabel id="demo-simple-select-label">Forum</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={gender}
-                        label="Gender"
-                        onChange={(e) => setgender(e.target.value)}
+                        value={forum}
+                        label="forum"
+                        onChange={(e) => setforum(e.target.value)}
                       >
-                        <MenuItem value='Male'>Male</MenuItem>
-                        <MenuItem value='Female'>Female</MenuItem>
+                        <MenuItem value='TMQ'>TMQ</MenuItem>
+                        <MenuItem value='PAT'>PAT</MenuItem>
+                        <MenuItem value='MWL'>MWL</MenuItem>
+                        <MenuItem value='MUC'>MUC</MenuItem>
+                        <MenuItem value='MYL'>MYL</MenuItem>
+                        <MenuItem value='MSM'>MSM</MenuItem>
+
+                      </Select>
+                    </FormControl>
+
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Roles :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={role}
+                        label="Role"
+                        onChange={(e) => setrole(e.target.value)}
+                      >
+                        <MenuItem value='Executive Member'>Executive Member</MenuItem>
+                        <MenuItem value='General Secretary'>General Secretary</MenuItem>
+                        <MenuItem value='President'>President</MenuItem>
 
                       </Select>
                     </FormControl>
                   </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Department :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={department}
+                        label="Department"
+                        onChange={(e) => setdepartment(e.target.value)}
+                      >
+                        {dataDept.map((row) => (
+                          <MenuItem value={row._id}>{row.departmentName}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      User Type :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={userType}
+                        label="User Type"
+                        onChange={(e) => setuserType(e.target.value)}
+                      >
+                        <MenuItem value='District'>District</MenuItem>
+                        <MenuItem value='Province'>Province</MenuItem>
+                        <MenuItem value='UC'>UC</MenuItem>
+                        <MenuItem value='Unit'>Unit</MenuItem>
+
+                      </Select>
+                    </FormControl>
+
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      District Area :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">District Area</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={DistrictArea}
+                        label="District Area"
+                        onChange={(e) => setDistrictArea(e.target.value)}
+                      >
+                        {districtAll.map((row) => (
+                          <MenuItem value={row._id}>{row.name}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+                    {/* <TextField
+
+                      value={DistrictArea}
+                      onChange={(e) => setDistrictArea(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" /> */}
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      PP Area :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">PP Area</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={PPArea}
+                        label="PP Area"
+                        onChange={(e) => setPPArea(e.target.value)}
+                      >
+                        {PPAll.map((row) => (
+                          <MenuItem value={row._id}>{row.name}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      UC Area :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">UC Area</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={UCArea}
+                        label="UC Area"
+                        onChange={(e) => setUCArea(e.target.value)}
+                      >
+                        {UCAll.map((row) => (
+                          <MenuItem value={row._id}>{row.name}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+                    {/* <TextField
+
+                      value={UCArea}
+                      onChange={(e) => setUCArea(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" /> */}
+
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Unit Area :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Unit Area</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={UnitArea}
+                        label="Unit Area"
+                        onChange={(e) => setUnitArea(e.target.value)}
+                      >
+                        {UnitAll.map((row) => (
+                          <MenuItem value={row._id}>{row.name}</MenuItem>
+                        ))}
+
+                      </Select>
+                    </FormControl>
+                    {/* <TextField
+
+                      value={UnitArea}
+                      onChange={(e) => setUnitArea(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" /> */}
+
+                  </Grid>
 
                   <Grid item xs={12} md={12} align="center">
-                    {/* <button type='submit'>Submit</button> */}
-                    <Button variant="contained" style={{backgroundColor:'#52ad4a'}} onClick={() => handleCloseUpdate()}>
+                    <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler1()}>
                       Submit
                     </Button>
                   </Grid>

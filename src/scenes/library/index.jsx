@@ -232,18 +232,6 @@ const Team = (props) => {
     })
 
 }
-  // View 
-  const handleClickOpen = (idData) => {
-    console.log(idData);
-    // setShow(false);
-    navigate('/membershipRequestsView',
-      {
-        state: {
-          post_id: idData,
-          // data: props.data
-        }
-      });
-  };
   // Submit 
     // submit add 
     const [loading1,setLoading1]=useState(true)
@@ -326,7 +314,7 @@ const Team = (props) => {
         console.log('I was closed by the timer')
       }
     })
-    navigate('/pdf'
+    navigate('/pdfView'
       ,
       {
         state: {
@@ -352,7 +340,11 @@ const Team = (props) => {
     // Request made to the backend api 
     // Send formData object 
     axios.post(`${url}upload-file`, formData,
-      { headers }).then(response => {
+    {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }).then(response => {
         console.log(response)
         setSelectedFile1(response.data.file)
 

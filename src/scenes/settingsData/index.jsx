@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import image from '../../components/Images/logo.png'
+// import 'animate.css';
 import Avatar from '@mui/material/Avatar';
 import url from '../url'
 import ClipLoader from "react-spinners/ClipLoader";
@@ -15,9 +16,7 @@ const ContainerStyle = {
       paddingTop: '180px',
       backgroundColor:'#e8eff9',
       color: 'white',
-  
   }
-  
   const btn = {
       width: '99%',
       marginTop: '20px',
@@ -45,7 +44,7 @@ const ContainerStyle = {
       marginRight: '20px',
       marginTop: '-70px',
       backgroundColor:'white',
-      height:'490px'
+      height:'430px'
   }
   const override = {
       display: ' block',
@@ -58,8 +57,32 @@ const ContainerStyle = {
 }
   const color = "black"
   
-  const heading = "ADMIN LOGIN"
+  const heading = "Update Password"
 function Login() {
+  const [items, setItems] = useState([]);
+
+    const getAdminLogin = (items) => {
+        axios.get(`${url}get-user`, {
+            params: {
+              _id: items
+            }
+          })
+          .then((response) => {
+            console.log("response.data.data[0]")
+            console.log(response.data)
+            setEmail(response.data.email)
+            // setPassword(response.data.password)
+          })
+          .catch(error => console.error(`Error:${error}`));
+      }
+      useEffect(() => {
+    
+        const items = JSON.parse(localStorage.getItem('items'));
+        console.log(items)
+        setItems(items)
+        getAdminLogin(items);
+    
+      }, []);
   const [loading, setLoading] = useState("");
      const [loading1, setLoading1] = useState(false);
   
@@ -82,35 +105,55 @@ function Login() {
      const submitHandler = async(e) => {
          e.preventDefault()
          // Loader 
-         setLoading1(true)
-         setTimeout(() => {
-             setLoading1(false)
-         }, 3000)
-        //  POst Request 
-         await axios.put(`${url}login-user`, {
-             email: email,
-             password: password
-         }, { headers }).then(response => {
-             console.log(response)
-             localStorage.setItem('items', JSON.stringify(response.data._id));
-             navigate('/home')
-  
-         })
-             .catch(err => {
-                 console.log(err)
-                 Swal.fire('Invalid Credentials')
-             })
+       if(email==='' ||password===''){
+        Swal.fire('Fill All Fields')
+
+       }else{
+        await axios.put(`${url}update-password`, {
+            email: email,
+            password: password
+        }, { headers }).then(response => {
+            console.log(response)
+            let timerInterval
+            Swal.fire({
+              title: 'Updated Successfully',
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+                setPassword('')
+           
+              }
+            })
+ 
+        })
+            .catch(err => {
+                console.log(err)
+                Swal.fire('Error Updating Password')
+            })
+       }
+        
      }
 
    
   return (
     <div>  
         < Grid container spacing={2} style={ContainerStyle}>
-         <Grid item xs={4} sm={4} md={4} lg={4} xl={4}></Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4} xl={4} style={gridCont}>
+          <Grid item xs={12} sm={12} md={6} lg={4} xl={4} style={gridCont}>
              <Grid align='center'>
             <Avatar src={image} variant="square" style={logoStyle} ></Avatar>
-              {/* <h1 style={headingStyle1}>LOGO</h1> */}
                <h6 style={headingStyle}>{heading}</h6>
     
     
@@ -133,7 +176,7 @@ function Login() {
                 submitHandler
     
               } style={btn} >
-                {loading1 ? <ClipLoader color={color} loading={loading1} css={override} size={10} /> : <h3>Login</h3>}
+                {loading1 ? <ClipLoader color={color} loading={loading1} css={override} size={10} /> : <h3>Update</h3>}
               </Button>
     
               <br />
@@ -141,7 +184,6 @@ function Login() {
             </Grid>
     
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4} ></Grid>
         </Grid></div>
   )
 }

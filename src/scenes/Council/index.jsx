@@ -1,16 +1,7 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
-import Select from '@mui/material/Select';
-
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,25 +15,10 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios'
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import Swal from 'sweetalert2'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-
 import url from "../url"
-// import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
-
-// import MDButton from "../../components/MDButton";
-
-
-// import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -219,6 +195,7 @@ const Team = () => {
       setLoading1(true)
       setTimeout(() => {
         setLoading1(false)
+        console.log(selectedFile1)
         axios.post(`${url}create-dept`, {
             departmentImg: selectedFile1,
             departmentName: departmentName,
@@ -251,6 +228,9 @@ const Team = () => {
               /* Read more about handling dismissals below */
               if (result.dismiss === Swal.DismissReason.timer) {
                 console.log('I was closed by the timer')
+                setdepartmentName('');
+                setDeptDescription('');
+                setSelectedFile1([])
               }
             })
           })
@@ -297,30 +277,7 @@ const Team = () => {
       renderCell: (row) => {
         return (
           <>
-            {/* {row.row.approvalStatus ?
-              <IconButton onClick={() => checkbox1(row.row._id)}>
-                <Tooltip title="Unapprove">
-               UnApprove
-                </Tooltip>
-              </IconButton>
-              :
-              <IconButton onClick={() => checkbox(row.row._id)}>
-                <Tooltip title="Approve">
-                 Approve
-                </Tooltip>
-              </IconButton>
-            } */}
-            {/* className */}
-            {/* <IconButton onClick={() => handleOpenUpdate()}>
-              <Tooltip title="Edit">
-                <EditIcon />
-              </Tooltip>
-            </IconButton> */}
-            {/* <IconButton onClick={() => handleClickOpen(row.row._id)}>
-              <Tooltip title="View">
-                <VisibilityIcon />
-              </Tooltip>
-            </IconButton> */}
+          
             <IconButton onClick={() => deleteData(row.row._id)}>
               <Tooltip title="Delete">
 
@@ -342,9 +299,9 @@ const Team = () => {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         <GridToolbarExport />
-        <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
+        {/* <Button startIcon={<AddIcon />} onClick={() => handleOpenAdd()}>
           Add
-        </Button>
+        </Button> */}
 
       </GridToolbarContainer>
     );
@@ -362,8 +319,14 @@ const Team = () => {
       e,
     );
     axios.post(`${url}upload-image`, formData,
-      { headers }).then(response => {
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    }).then(response => {
+        console.log('response.data')
         console.log(response.data)
+
         setSelectedFile1(response.data)
 
       })
@@ -394,7 +357,7 @@ const Team = () => {
     <>
       <Box display="flex" justifyContent="space-between" p={2} style={{ borderBottom: '1px solid #adadad' }}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
 

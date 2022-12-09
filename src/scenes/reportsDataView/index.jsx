@@ -69,6 +69,7 @@ const Team = () => {
             console.log('response')
             console.log(response);
             setData(response.data);
+
             setImages(response.data.images)
             console.log(data);
             setLoading(false)
@@ -103,11 +104,9 @@ const Team = () => {
               <div>
               <>
                                     {/* AppBAr  */}
-                                    <ClipLoader color={color} loading={loading} css={override} size={30} />
-                                    {console.log(state.post_id)}
-                                    {console.log('state data id')}
-                                    {console.log(state.data)}
-                                    <Grid container spacing={2} >
+                                   {loading?<ClipLoader color={color} loading={loading} css={override} size={30} />:
+                                   <> 
+                                      <Grid container spacing={2} >
                                         <Grid item xs={12} md={12} >
                                             <Grid container spacing={2}>
                                                 <Grid item xs={12} md={12}>
@@ -133,7 +132,7 @@ const Team = () => {
 
                                                                     </TableCell>
                                                                     <TableCell style={TextColor} component="th" scope="row">
-                                                                       {data.date}
+                                                                       {data.date===undefined?<span>Null</span>:<span>{data.date}</span>}
 
                                                                     </TableCell>
 
@@ -146,9 +145,9 @@ const Team = () => {
 
                                                                     </TableCell>
                                                                     <TableCell style={TextColor} component="th" scope="row">
-                                                                    {images.map((dataimg, idx) => (
+                                                                    {/* {images.map((dataimg, idx) => (
                                                                             <img style={imgStyle} src={`${url}${dataimg}`} />
-                                                                        ))}
+                                                                        ))} */}
 
                                                                     </TableCell>
 
@@ -201,7 +200,8 @@ const Team = () => {
 
                                                                     </TableCell>
                                                                     <TableCell style={TextColor} component="th" scope="row">
-                                                                        {data.department}
+                                                                        {data.department===undefined?<span>Null</span>:<span>
+                                                                           {data.department.departmentName} </span>}
 
                                                                     </TableCell>
 
@@ -243,6 +243,11 @@ const Team = () => {
                                             </Grid>
                                         </Grid>
                                     </Grid>
+                                    </>} 
+                                    {console.log(state.post_id)}
+                                    {console.log('state data id')}
+                                    {console.log(state.data)}
+                                 
                                 </>
         </div>
 
