@@ -13,7 +13,9 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 
 const Topbar = () => {
   const navigate = useNavigate();
@@ -47,14 +49,15 @@ const Topbar = () => {
           backgroundColor={colors.primary[400]}
           borderRadius="3px"
         >
-          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-          <IconButton type="button" sx={{ p: 1 }}>
+          {/* <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" /> */}
+          {/* <IconButton type="button" sx={{ p: 1 }}>
             <SearchIcon />
-          </IconButton>
+          </IconButton> */}
         </Box>
 
         {/* ICONS */}
         <Box display="flex">
+        <Tooltip title="Theme">
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlinedIcon />
@@ -62,15 +65,24 @@ const Topbar = () => {
               <LightModeOutlinedIcon />
             )}
           </IconButton>
-          <IconButton>
+          </Tooltip>
+          {/* <IconButton>
             <NotificationsOutlinedIcon />
+          </IconButton> */}
+           <Tooltip title="Logout">
+           <IconButton   onClick={() => {
+          localStorage.removeItem('items');
+          // setIsLoggedin(false);
+         navigate('/')
+        
+       }}>
+            <LogoutIcon />
           </IconButton>
-          <IconButton>
-            <SettingsOutlinedIcon />
-          </IconButton>
-          <IconButton>
+           </Tooltip>
+         
+          {/* <IconButton>
             <PersonOutlinedIcon />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
       {/* <Box display="flex" justifyContent="space-between" p={2} style={{ borderBottom: '1px solid #adadad' }}>

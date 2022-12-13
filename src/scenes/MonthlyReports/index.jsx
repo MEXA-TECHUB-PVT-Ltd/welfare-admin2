@@ -1,15 +1,8 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
 import Select from '@mui/material/Select';
-
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
@@ -19,18 +12,14 @@ import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '@mui/material/Modal';
 import DoneIcon from '@mui/icons-material/Done';
-import Tooltip from '@mui/material/Tooltip';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios'
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import Swal from 'sweetalert2'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useNavigate } from 'react-router-dom';
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -40,9 +29,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from '@mui/material/TableContainer';
+import Tooltip from '@mui/material/Tooltip';
+
 import url from "../url"
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import ClipLoader from "react-spinners/ClipLoader";
+import React, { useState, useEffect } from "react";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -51,7 +41,6 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
-import React, { useState, useEffect } from "react";
 
 const style = {
   position: 'absolute',
@@ -71,8 +60,8 @@ const style1 = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '90%',
-  height:'100%',
-  overflowY:'scroll',
+  // height: '100%',
+  overflowY: 'scroll',
   bgcolor: 'beige',
   borderRadius: '10px',
   boxShadow: 24,
@@ -85,12 +74,7 @@ const addbtn = {
   cursor: 'pointer'
 
 }
-const override = {
-  display: ' block',
-  margin: '0 auto',
-  //   borderColor: 'red',
-}
-const color = "black"
+
 const TextColor1 = {
   color: 'black',
   fontFamily: 'Roboto, sans-serif',
@@ -137,36 +121,15 @@ const TabsStyle = {
 const Team = () => {
   // Tabs value
   const navigate = useNavigate();
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const headers = {
     'Content-Type': 'application/json'
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [EditFieldData, setEditFieldData] = useState([]);
-  const [image, setimage] = useState([]);
-  const [email, setemail] = useState([]);
-  const [gender, setgender] = useState([]);
-  const [dob, setdob] = useState([]);
-  const [name1, setname1] = useState([]);
-  const [profession, setprofession] = useState([]);
-  // Approve 
   const [openAdd, setOpenAdd] = React.useState(false);
-  const handleOpenAdd = () => {
-    setOpenAdd(true);
-  }
   const handleCloseAdd = () => setOpenAdd(false);
   // Update 
   const [openUpdate, setOpenUpdate] = React.useState(false);
-  const handleOpenUpdate = (row) => {
-    setOpenUpdate(true);
-    console.log(row)
-  }
   const handleCloseUpdate = () => setOpenUpdate(false);
   // Delete 
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -260,82 +223,81 @@ const Team = () => {
   const [MonthlyMeeting, setMonthlyMeeting] = useState([]);
   const [TrainingSession, setTrainingSession] = useState([]);
   const [created_date, setcreated_date] = useState(new Date());
-  const [sortByDate, setSortByDate] = useState(new Date());
   // Submit 
   const submitHandler = async () => {
     // Loader 
     setLoading1(true)
     setTimeout(() => {
-        setLoading1(false)
+      setLoading1(false)
 
     }, 3000)
     axios.post(`${url}monthlyReport`, {
-        userId: userID,
-        LifeTimeMembersTarget: LifeTimeMembersTarget,
-        LifeTimeMembersAchieved: LifeTimeMembersAchieved,
-        RegularMembersTarget: RegularMembersTarget,
-        RegularMembersAchieved: RegularMembersAchieved,
-        RestorationOfDefaultersTarget: RestorationOfDefaultersTarget,
-        RestorationOfDefaultersAchieved: RestorationOfDefaultersAchieved,
-        MembershipAmountTarget: MembershipAmountTarget,
-        MembershipAmountAchieved: MembershipAmountAchieved,
-        NewUcsTarget: NewUcsTarget,
-        NewUcsAchieved: NewUcsAchieved,
-        MonthlyQuranCircleTarget: MonthlyQuranCircleTarget,
-        MonthlyQuranCircleAchieved: MonthlyQuranCircleAchieved,
-        MonthlyDaroodCircleTarget: MonthlyDaroodCircleTarget,
-        MonthlyDaroodCircleAchieved: MonthlyDaroodCircleAchieved,
-        MonthlyMeeting: MonthlyMeeting,
-        TrainingSession: TrainingSession,
-        created_date: created_date
+      userId: userID,
+      LifeTimeMembersTarget: LifeTimeMembersTarget,
+      LifeTimeMembersAchieved: LifeTimeMembersAchieved,
+      RegularMembersTarget: RegularMembersTarget,
+      RegularMembersAchieved: RegularMembersAchieved,
+      RestorationOfDefaultersTarget: RestorationOfDefaultersTarget,
+      RestorationOfDefaultersAchieved: RestorationOfDefaultersAchieved,
+      MembershipAmountTarget: MembershipAmountTarget,
+      MembershipAmountAchieved: MembershipAmountAchieved,
+      NewUcsTarget: NewUcsTarget,
+      NewUcsAchieved: NewUcsAchieved,
+      MonthlyQuranCircleTarget: MonthlyQuranCircleTarget,
+      MonthlyQuranCircleAchieved: MonthlyQuranCircleAchieved,
+      MonthlyDaroodCircleTarget: MonthlyDaroodCircleTarget,
+      MonthlyDaroodCircleAchieved: MonthlyDaroodCircleAchieved,
+      MonthlyMeeting: MonthlyMeeting,
+      TrainingSession: TrainingSession,
+      created_date: created_date
     }, { headers }).then(response => {
-        console.log(response)
-        setOpenAdd(false);
-        setData([...data, response.data]);
-        // Empty state 
-        setLifeTimeMembersTarget([]);
-        setLifeTimeMembersAchieved([]);
-        setRegularMembersTarget([]);
-        setRegularMembersAchieved([]);
-        setRestorationOfDefaultersTarget([]);
-        setRestorationOfDefaultersAchieved([])
-        setMembershipAmountTarget([])
-        setMembershipAmountAchieved([]);
-        setNewUcsTarget([]);
-        setNewUcsAchieved([]);
-        setMonthlyQuranCircleTarget([])
-        setMonthlyQuranCircleAchieved([])
-        setMonthlyDaroodCircleTarget([])
-        setMonthlyDaroodCircleAchieved([])
-        setMonthlyMeeting([])
-        setTrainingSession([])
-        let timerInterval
-        Swal.fire({
-            title: 'Created Report Successfully',
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-        }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-            }
-        })
+      console.log(response)
+      setOpenAdd(false);
+      setData([...data, response.data]);
+      // Empty state 
+      setLifeTimeMembersTarget([]);
+      setLifeTimeMembersAchieved([]);
+      setRegularMembersTarget([]);
+      setRegularMembersAchieved([]);
+      setRestorationOfDefaultersTarget([]);
+      setRestorationOfDefaultersAchieved([])
+      setMembershipAmountTarget([])
+      setMembershipAmountAchieved([]);
+      setNewUcsTarget([]);
+      setNewUcsAchieved([]);
+      setMonthlyQuranCircleTarget([])
+      setMonthlyQuranCircleAchieved([])
+      setMonthlyDaroodCircleTarget([])
+      setMonthlyDaroodCircleAchieved([])
+      setMonthlyMeeting([])
+      setTrainingSession([])
+      let timerInterval
+      Swal.fire({
+        title: 'Created Report Successfully',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
     })
-        .catch(err => {
-            console.log(err)
-        })
+      .catch(err => {
+        console.log(err)
+      })
 
-}
+  }
   // Edit Data 
   const [userIDEdit, setuserIDEdit] = useState([]);
   const [LifeTimeMembersTargetEdit, setLifeTimeMembersTargetEdit] = useState([]);
@@ -393,6 +355,8 @@ const Team = () => {
   //Get API Axios
   const [data, setData] = useState([]);
   const [dataUser, setDataUser] = useState([]);
+  const [departmentsData, setDepartmentsData] = useState([]);
+
 
   const [loading, setLoading] = useState(true);
   const [loading1, setLoading1] = useState(true);
@@ -401,7 +365,9 @@ const Team = () => {
     axios.get(`${url}monthlyReportGetAll`)
       .then((response) => {
         const allData = response.data;
+        console.log('allData');
         console.log(allData);
+
         setData(response.data);
         // setimagesdata(response.data.images);
 
@@ -418,7 +384,22 @@ const Team = () => {
         setDataUser(response.data);
         // setimagesdata(response.data.images);
 
-        setLoading(true)
+        setLoading(false)
+      })
+      .catch(error => console.error(`Error:${error}`));
+
+  }
+  const getAllDataDepartments = () => {
+    axios.get(`${url}get-all`)
+      .then((response) => {
+        const allData = response.data;
+        console.log('departsgd');
+        console.log(allData);
+
+        setDepartmentsData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
       })
       .catch(error => console.error(`Error:${error}`));
 
@@ -426,16 +407,328 @@ const Team = () => {
   useEffect(() => {
     getAllData();
     getAllDataUsers();
+    getAllDataDepartments();
 
     // getAllDataUnapprove();
     // getAllDataApprove();
 
   }, []);
+  const [filterForum, setFilterForum] = React.useState('');
+  const [filterdepartment, setFilterDepartment] = React.useState('');
+  const [filterUserType, setFilterUserType] = React.useState('');
+  const [startDateFilter, setstartDateFilter] = useState('');
+  const [endDateFilter, setEndDateFilter] = useState('');
+
+
+
+  const handleChangeFilterDate = () => {
+    setLoading(true)
+    console.log(startDateFilter)
+    console.log(endDateFilter)
+    axios.post(`${url}get-report-between-two-dates`, {
+      sdate: startDateFilter,
+      edate: endDateFilter
+
+    }, { headers }).then(response => {
+      console.log(response)
+      setData(response.data);
+      setLoading(false)
+      setstartDateFilter('')
+      setEndDateFilter('')
+    })
+      .catch(err => {
+        console.log(err)
+      })
+
+
+  }
+  const handleChange = () => {
+    console.log('filtere');
+    console.log(filterForum.length)
+    console.log(filterdepartment.length)
+    console.log(filterUserType)
+    setLoading(true)
+
+
+    if (filterForum.length === 0 && filterdepartment.length === 0 && filterUserType.length === 0) {
+      getAllData();
+      console.log('get oref ')
+    } else if (filterForum.length !== 0 && filterdepartment.length === 0 && filterUserType.length === 0) {
+      console.log('not empty forum')
+      axios.get(`${url}get-report-by-forum`, {
+        params: {
+          forum: filterForum
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+
+
+      })
+        .catch(error => console.error(`Error:${error}`));
+
+    } else if (filterForum.length === 0 && filterdepartment.length !== 0 && filterUserType.length === 0) {
+      console.log('not empty dept')
+      axios.get(`${url}get-report-by-department`, {
+        params: {
+          department: filterdepartment
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+
+    } else if (filterForum.length === 0 && filterdepartment.length === 0 && filterUserType.length !== 0) {
+      console.log('not empty usertype')
+      axios.get(`${url}get-report-by-userType`, {
+        params: {
+          userType: filterUserType
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+
+    } else if (filterForum.length !== 0 && filterdepartment.length !== 0 && filterUserType.length === 0) {
+      console.log('not empty forum and department')
+      axios.get(`${url}get-report-by-forum-dept`, {
+        params: {
+          forum: filterForum,
+          department: filterdepartment
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+    } else if (filterForum.length !== 0 && filterdepartment.length === 0 && filterUserType.length !== 0) {
+      console.log('not empty forum and type')
+      axios.get(`${url}get-report-by-forum-usertype`, {
+        params: {
+          forum: filterForum,
+          userType: filterUserType
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+    } else if (filterForum.length === 0 && filterdepartment.length !== 0 && filterUserType.length !== 0) {
+      console.log('not empty dept and type')
+      axios.get(`${url}get-report-by-dept-usertype`, {
+        params: {
+          department: filterdepartment,
+          userType: filterUserType
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+    } else if (filterForum.length !== 0 && filterdepartment.length !== 0 && filterUserType.length !== 0) {
+      console.log('not empty forum and department and user type')
+      axios.get(`${url}get-report-by-forum-dept-usertype`, {
+        params: {
+          department: filterdepartment,
+          userType: filterUserType,
+          forum: filterForum
+        }
+      }).then(response => {
+        const allData = response.data;
+        console.log('allData');
+        console.log(allData);
+
+        setData(response.data);
+        // setimagesdata(response.data.images);
+
+        setLoading(false)
+        setFilterDepartment('')
+        setFilterForum('')
+        setFilterUserType('')
+      })
+        .catch(error => console.error(`Error:${error}`));
+
+    } else {
+      console.log('dgdgd')
+    }
+  };
+  const columns = [
+    // { field: "_id", headerName: "ID" },
+    {
+      field: "userName",
+      headerName: "Submitted By",
+      flex: 1,
+      // cellClassName: "name-column--cell",
+    },
+    {
+      field: "userType",
+      headerName: "User Type",
+      // type: "number",
+      headerAlign: "left",
+      flex: 1,
+
+      align: "left",
+    },
+    {
+      field: "forum",
+      headerName: "Forum",
+      flex: 1,
+    },
+
+    {
+      field: "department",
+      headerName: "Department",
+      flex: 1,
+      renderCell: (row) => {
+        return (
+
+
+          <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+            {row.row.DistrictArea.name}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: "AreaNumber",
+      headerName: "AreaNumber",
+      flex: 1,
+    },
+    {
+      field: "created_date",
+      headerName: "created_date",
+      flex: 1,
+    },
+
+    // {
+    //   field: "gender",
+    //   headerName: "Gender",
+    //   flex: 1,
+    // },
+    // {
+    //   field: "profession",
+    //   headerName: "Profession",
+    //   flex: 1,
+    // },
+
+    {
+      field: "_id",
+      headerName: "Action",
+      flex: 1,
+      renderCell: (row) => {
+        return (
+          <>
+            {/* {row.row.approvalStatus ?
+              <IconButton onClick={() => checkbox1(row.row._id)}>
+                <Tooltip title="Unapprove">
+               UnApprove
+                </Tooltip>
+              </IconButton>
+              :
+              <IconButton onClick={() => checkbox(row.row._id)}>
+                <Tooltip title="Approve">
+                 Approve
+                </Tooltip>
+              </IconButton>
+            } */}
+            {/* className */}
+            {/* <IconButton onClick={() => handleOpenUpdate()}>
+              <Tooltip title="Edit">
+                <EditIcon />
+              </Tooltip>
+            </IconButton> */}
+            <IconButton onClick={() => onToggleEditMode(row.row._id)}>
+              <Tooltip title="Edit">
+                < EditIcon style={{ color: '#7e7e7e' }} />
+              </Tooltip>
+            </IconButton>
+            <IconButton onClick={() => deleteData(row.row._id)}>
+              <Tooltip title="Delete">
+
+                < DeleteIcon style={{ color: 'red' }} />
+              </Tooltip>
+            </IconButton>
+
+
+          </>
+
+        );
+      },
+    },
+  ];
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer style={{ marginBottom: '5px' }}>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport />
+        
+
+      </GridToolbarContainer>
+    )
+  }
   return (
     <>
       <Box display="flex" justifyContent="space-between" p={2} style={{ borderBottom: '1px solid #adadad' }}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
 
@@ -449,12 +742,127 @@ const Team = () => {
             <Header title="Monthly Reports" subtitle="Managing the Monthly Reports" />
 
           </Grid>
-          <Grid item xs={12} md={2} mt>
-            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => setOpenAdd(true)}>
-              Add
-            </Button>
+          <Grid item xs={12} md={2} mt> 
+          <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => setOpenAdd(true)}>
+          Add
+        </Button></Grid>
+
+          <Grid item xs={12} md={3} >
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Forum</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={filterForum}
+                  label="Forum"
+                  onChange={(e) => setFilterForum(e.target.value)}
+                >
+                  <MenuItem value='TMQ'>TMQ</MenuItem>
+                  <MenuItem value='PAT'>PAT</MenuItem>
+                  <MenuItem value='MWL'>MWL</MenuItem>
+                  <MenuItem value='MUC'>MUC</MenuItem>
+                  <MenuItem value='MYL'>MYL</MenuItem>
+                  <MenuItem value='MSM'>MSM</MenuItem>
+
+
+
+
+                </Select>
+              </FormControl>
+            </Box>
 
           </Grid>
+          <Grid item xs={12} md={3} >
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={filterdepartment}
+                  label="Department"
+                  onChange={(e) => setFilterDepartment(e.target.value)}
+                >
+
+                  {departmentsData.map((row) => (
+                    <MenuItem value={row._id}>{row.departmentName}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+
+          </Grid>
+          <Grid item xs={12} md={3} >
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={filterUserType}
+                  label="User Type"
+                  onChange={(e) => setFilterUserType(e.target.value)}
+                >
+                  <MenuItem value='District'>District</MenuItem>
+                  <MenuItem value='Province'>Province</MenuItem>
+                  <MenuItem value='UC'>UC</MenuItem>
+                  <MenuItem value='Unit'>Unit</MenuItem>
+
+                </Select>
+              </FormControl>
+            </Box>
+
+          </Grid>
+          <Grid item xs={12} md={3} mt align='center'>
+            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => handleChange()}>
+              Filter
+            </Button>
+            {/* <Typography variant="h6" style={{ backgroundColor: '#52ad4a',padding:'10px' ,borderRadius:'5px',color:'white'}}>
+            Select to Filter
+            </Typography> */}
+
+
+          </Grid>
+
+          <Grid item xs={12} md={2} >
+            <Typography color="text.primary" style={{ marginTop: '12px' }}> Select Start Date :</Typography>
+
+
+
+          </Grid>
+          <Grid item xs={12} md={2} >
+            <input type="date"
+              id="birthday"
+              value={startDateFilter}
+              onChange={(e) => setstartDateFilter(e.target.value)} name="birthday" style={{ padding: '10px', borderRadius: '5px', border: '1px solid #c2c2c2' }} />
+
+
+          </Grid>
+          <Grid item xs={12} md={1} >
+          </Grid>
+          <Grid item xs={12} md={2} >
+            <Typography color="text.primary" style={{ marginTop: '12px' }}>  Select End Date  :</Typography>
+
+          </Grid>
+          <Grid item xs={12} md={2} >
+            <input
+              value={endDateFilter}
+              onChange={(e) => setEndDateFilter(e.target.value)}
+              type="date" id="birthday" name="birthday" style={{ padding: '10px', borderRadius: '5px', border: '1px solid #c2c2c2' }} />
+
+          </Grid>
+          <Grid item xs={12} md={3} mt align='center'>
+            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => handleChangeFilterDate()}>
+              Filter by Date
+            </Button>
+            {/* <Typography variant="h6" style={{ backgroundColor: '#52ad4a',padding:'10px' ,borderRadius:'5px',color:'white'}}>
+            Select to Filter
+            </Typography> */}
+
+
+          </Grid>
+
         </Grid>
 
         <Box sx={{ width: '100%' }}>
@@ -481,7 +889,7 @@ const Team = () => {
                 color: colors.greenAccent[300],
               },
               "& .MuiDataGrid-columnHeaders": {
-                backgroundColor: "#7e7e7e",
+                backgroundColor: "#52ad4a",
                 borderBottom: "none",
               },
               "& .MuiDataGrid-virtualScroller": {
@@ -489,125 +897,25 @@ const Team = () => {
               },
               "& .MuiDataGrid-footerContainer": {
                 borderTop: "none",
-                backgroundColor: "#7e7e7e",
+                backgroundColor: "#52ad4a",
               },
               "& .MuiCheckbox-root": {
                 color: `${colors.greenAccent[200]} !important`,
               },
             }}
           >
-            {/* <DataGrid
-                // {...data}
+            <DataGrid
+              // {...data}
 
-                rows={data}
-                columns={columns}
-                getRowId={(row) => row._id}
-                loading={loading}
-                components={{
-                  Toolbar: CustomToolbar,
-                }}
-              /> */}
-            <TableContainer >
-              <Table sx={{ minWidth: 650 }} aria-label="simple table" >
-                <TableHead>
-
-                  <TableRow>
-                    <TableCell style={TextColor1} colSpan={1}>Name</TableCell>
-                    <TableCell style={TextColor1} colSpan={1}>Area</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>LifeTime Members</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Regular Members</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Restoration Of Defaulters</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Membership Amount</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>New Ucs</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Monthly Quran Circle</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Monthly Darood Circle</TableCell>
-                    <TableCell style={TextColor1} colSpan={1}>Monthly Meeting</TableCell>
-                    <TableCell style={TextColor1} colSpan={1}>Training Session</TableCell>
-                    <TableCell style={TextColor1} colSpan={2}>Action</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell ></TableCell>
-                    <TableCell ></TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell style={TextColor1}>Target</TableCell>
-                    <TableCell style={TextColor1}>Achieved</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-
-
-
-
-                  </TableRow>
-
-                </TableHead>
-                <TableBody>
-
-                  {data.map((row) => (
-
-                    <TableRow
-                      key={row.name}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell >{row.userName}</TableCell>
-                      <TableCell >
-                        {row.userType == 'Unit' ? <>{row.UnitArea}</> : null}
-                        {row.userType == 'District' ? <>{row.DistrictArea}</> : null}
-                        {row.userType == 'Province' ? <>{row.PPArea}</> : null}
-                        {row.userType == 'UC' ? <>{row.UCArea}</> : null}
-                      </TableCell>
-                      <TableCell>{row.LifeTimeMembersTarget}</TableCell>
-                      <TableCell>{row.LifeTimeMembersAchieved}</TableCell>
-                      <TableCell>{row.RegularMembersTarget}</TableCell>
-                      <TableCell>{row.RegularMembersAchieved}</TableCell>
-                      <TableCell>{row.RestorationOfDefaultersTarget}</TableCell>
-                      <TableCell>{row.RestorationOfDefaultersAchieved}</TableCell>
-                      <TableCell>{row.MembershipAmountTarget}</TableCell>
-                      <TableCell>{row.MembershipAmountAchieved}</TableCell>
-                      <TableCell>{row.NewUcsTarget}</TableCell>
-                      <TableCell>{row.NewUcsAchieved}</TableCell>
-                      <TableCell>{row.MonthlyQuranCircleTarget}</TableCell>
-                      <TableCell>{row.MonthlyQuranCircleAchieved}</TableCell>
-                      <TableCell>{row.MonthlyDaroodCircleTarget}</TableCell>
-                      <TableCell>{row.MonthlyDaroodCircleAchieved}</TableCell>
-                      <TableCell>{row.MonthlyMeeting}</TableCell>
-                      <TableCell>{row.TrainingSession}</TableCell>
-                      <TableCell>
-
-                        {/* <button className={classes.btn}
-                                                        onClick={() => onToggleEditMode(row._id)}
-                                                    >
-                                                        < EditIcon />
-                                                    </button> */}
-                          < EditIcon style={{ color: '#7e7e7e' }} onClick={() => onToggleEditMode(row._id)}/>
-                      </TableCell>
-                      <TableCell>
-                        {/* <button className={classes.btn1}
-                                                        onClick={() => {
-                                                            console.log(row._id)
-                                                            deleteData(row._id)
-                                                        }}
-                                                    > <DeleteIcon /></button> */}
-                          < DeleteIcon  style={{ color: 'red' }} onClick={() => deleteData(row._id)}/>
-                      </TableCell>
-
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+              rows={data}
+              columns={columns}
+              getRowId={(row) => row._id}
+              loading={loading}
+              components={{
+                Toolbar: CustomToolbar,
+              }}
+            />
+            
           </Box>
           {/* </TabPanel> */}
 
@@ -630,17 +938,12 @@ const Team = () => {
               <Box sx={style1}>
 
                 <Grid container spacing={2} >
-                <Grid item xs={10} md={10}>
+                  <Grid item xs={10} md={10}>
                     <Typography style={{ color: '#52ad4a', fontWeight: 700 }} id="transition-modal-title" variant="h5" component="h2">
                       Add Monthly Report
                     </Typography>
                   </Grid>
-                  <Grid item xs={1} md={1}>
-                    {/* <MDButton  variant="gradient" color="error"  > */}
-                    <CloseIcon onClick={handleCloseAdd} style={{ cursor: 'pointer' }} />
-
-                    {/* </MDButton> */}
-                  </Grid>
+                 
                   <Grid item xs={12} md={6}>
                     <FormControl fullWidth style={{ marginTop: '30px' }}>
                       <InputLabel id="demo-simple-select-label">Select User</InputLabel>
@@ -782,7 +1085,7 @@ const Team = () => {
                                                     </Grid> */}
 
                   <Grid item xs={12} md={12} align="center">
-                  <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler()}>
+                    <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler()}>
                       Submit
                     </Button>
                     {/* <button className={classes.btnSubmit} type='submit'>
@@ -818,12 +1121,6 @@ const Team = () => {
                     <Typography style={{ color: '#52ad4a', fontWeight: 700 }} id="transition-modal-title" variant="h5" component="h2">
                       Update Monthly Report
                     </Typography>
-                  </Grid>
-                  <Grid item xs={1} md={1}>
-                    {/* <MDButton  variant="gradient" color="error"  > */}
-                    <CloseIcon onClick={handleCloseUpdate} style={{ cursor: 'pointer' }} />
-
-                    {/* </MDButton> */}
                   </Grid>
 
                   <Grid item xs={12} md={6}>
