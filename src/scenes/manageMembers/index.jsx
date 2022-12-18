@@ -145,11 +145,37 @@ const Team = () => {
       setgender(response.data.gender);
       setprofession(response.data.profession);
       setrole(response.data.role);
-      setdepartment(response.data.department)
-      setDistrictArea(response.data.DistrictArea._id)
-      setPPArea(response.data.PPArea._id)
-      setUCArea(response.data.UCArea._id)
-      setUnitArea(response.data.UnitArea._id)
+      setdepartment(response.data.department._id)
+      // console.log(response.data.department._id)
+
+      // setDistrictArea(response.data.DistrictArea._id)
+      // setPPArea(response.data.PPArea._id)
+      if (response.data.DistrictArea === undefined) {
+        console.log('No District Area')
+      } else {
+        setDistrictArea(response.data.DistrictArea._id)
+
+      }
+      if (response.data.PPArea === undefined) {
+        console.log('No PPArea')
+      } else {
+        setPPArea(response.data.PPArea._id)
+      }
+      if (response.data.UCArea === undefined) {
+        console.log('No UCArea')
+      } else {
+        setUCArea(response.data.UCArea._id)
+
+      }
+      if (response.data.UnitArea === undefined) {
+        console.log('No UnitArea')
+      } else {
+        setUnitArea(response.data.UnitArea._id)
+
+
+      }
+      // setUCArea(response.data.UCArea._id)
+      // setUnitArea(response.data.UnitArea._id)
 
       setOpenUpdate(true);
     })
@@ -237,6 +263,7 @@ const Team = () => {
   };
   // update 
   const submitHandler = async () => {
+// console.log(UCArea)
 
     axios.put(`${url}update-user`, {
       // id:1,
@@ -291,7 +318,6 @@ const Team = () => {
       .catch(err => {
         console.log(err)
       })
-    // })
 
 
   }
@@ -328,9 +354,10 @@ const Team = () => {
       renderCell: (row) => {
         return (
           <>
-          <span>{row.row.department===undefined?<span>NUll</span>:<span>{row.row.department.departmentName}</span>}</span>
+            <span>{row.row.department === undefined ? <span>NUll</span> : <span>{row.row.department.departmentName}</span>}</span>
           </>
-          )}
+        )
+      }
     },
     {
       field: "forum",
@@ -426,7 +453,7 @@ const Team = () => {
   const [filterByRole, setfilterByRole] = useState('')
   const [filterByUserType, setfilterByUserType] = useState('')
 
-  const FilterDataDEPT= (DEPT) => {
+  const FilterDataDEPT = (DEPT) => {
     setLoading(true)
     axios.get(`${url}get-users-by-department`, {
       params: {
@@ -438,15 +465,15 @@ const Team = () => {
       console.log(allData);
       setData(response.data);
       // setimagesdata(response.data.images);
-  
+
       setLoading(false)
       setfilterByDept('')
-   
+
     })
       .catch(error => console.error(`Error:${error}`));
-  
+
   }
-  const FilterDataROLE= (Role) => {
+  const FilterDataROLE = (Role) => {
     setLoading(true)
     axios.get(`${url}get-users-by-role`, {
       params: {
@@ -458,15 +485,15 @@ const Team = () => {
       console.log(allData);
       setData(response.data);
       // setimagesdata(response.data.images);
-  
+
       setLoading(false)
       setfilterByRole('')
-   
+
     })
       .catch(error => console.error(`Error:${error}`));
-  
+
   }
-  const FilterDataForum= (Forum) => {
+  const FilterDataForum = (Forum) => {
     setLoading(true)
     axios.get(`${url}get-users-by-forum`, {
       params: {
@@ -478,15 +505,15 @@ const Team = () => {
       console.log(allData);
       setData(response.data);
       // setimagesdata(response.data.images);
-  
+
       setLoading(false)
       setfilterByForum('')
-   
+
     })
       .catch(error => console.error(`Error:${error}`));
-  
+
   }
-  const FilterDataUserType= (userType) => {
+  const FilterDataUserType = (userType) => {
     setLoading(true)
     axios.get(`${url}get-users-by-user-type`, {
       params: {
@@ -498,16 +525,16 @@ const Team = () => {
       console.log(allData);
       setData(response.data);
       // setimagesdata(response.data.images);
-  
+
       setLoading(false)
       setfilterByUserType('')
-   
+
     })
       .catch(error => console.error(`Error:${error}`));
-  
+
   }
 
-  
+
   function CustomToolbar() {
     return (
       <GridToolbarContainer style={{ marginBottom: '5px' }}>
@@ -637,7 +664,7 @@ const Team = () => {
                   id="demo-simple-select"
                   value={filterByDept}
                   label="Filter by Department"
-                onChange={(e) => FilterDataDEPT(e.target.value)}
+                  onChange={(e) => FilterDataDEPT(e.target.value)}
                 >
                   {dataDept.map((row) => (
                     <MenuItem value={row._id}>{row.departmentName}</MenuItem>
@@ -659,14 +686,14 @@ const Team = () => {
                   id="demo-simple-select"
                   value={filterByForum}
                   label="Filter by Forum"
-                onChange={(e) => FilterDataForum(e.target.value)}
+                  onChange={(e) => FilterDataForum(e.target.value)}
                 >
-                    <MenuItem value='TMQ'>TMQ</MenuItem>
-                    <MenuItem value='PAT'>PAT</MenuItem>
-                    <MenuItem value='MWL'>MWL</MenuItem>
-                    <MenuItem value='MUC'>MUC</MenuItem>
-                    <MenuItem value='MYL'>MYL</MenuItem>
-                    <MenuItem value='MSM'>MSM</MenuItem>
+                  <MenuItem value='TMQ'>TMQ</MenuItem>
+                  <MenuItem value='PAT'>PAT</MenuItem>
+                  <MenuItem value='MWL'>MWL</MenuItem>
+                  <MenuItem value='MUC'>MUC</MenuItem>
+                  <MenuItem value='MYL'>MYL</MenuItem>
+                  <MenuItem value='MSM'>MSM</MenuItem>
 
 
 
@@ -684,11 +711,11 @@ const Team = () => {
                   id="demo-simple-select"
                   value={filterByRole}
                   label="Filter by Role"
-                onChange={(e) => FilterDataROLE(e.target.value)}
+                  onChange={(e) => FilterDataROLE(e.target.value)}
                 >
-                    <MenuItem value='Executive Member'>Executive Member</MenuItem>
-                    <MenuItem value='General Secretary'>General Secretary</MenuItem>
-                    <MenuItem value='President'>President</MenuItem>
+                  <MenuItem value='Executive Member'>Executive Member</MenuItem>
+                  <MenuItem value='General Secretary'>General Secretary</MenuItem>
+                  <MenuItem value='President'>President</MenuItem>
 
 
 
@@ -706,12 +733,12 @@ const Team = () => {
                   id="demo-simple-select"
                   value={filterByUserType}
                   label="Filter by Forum"
-                onChange={(e) => FilterDataUserType(e.target.value)}
+                  onChange={(e) => FilterDataUserType(e.target.value)}
                 >
-                    <MenuItem value='District'>District</MenuItem>
-                    <MenuItem value='Province'>Province</MenuItem>
-                    <MenuItem value='UC'>UC</MenuItem>
-                    <MenuItem value='Unit'>Unit</MenuItem>
+                  <MenuItem value='District'>District</MenuItem>
+                  <MenuItem value='Province'>Province</MenuItem>
+                  <MenuItem value='UC'>UC</MenuItem>
+                  <MenuItem value='Unit'>Unit</MenuItem>
 
 
 
