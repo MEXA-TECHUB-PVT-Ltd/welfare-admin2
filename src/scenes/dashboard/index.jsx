@@ -159,8 +159,14 @@ const Dashboard = () => {
     },
     {
       field: "department",
-      headerName: "department",
+      headerName: "Department",
       flex: 1,
+      renderCell: (row) => {
+        return (
+          <>
+          <span>{row.row.department===undefined?<span>NUll</span>:<span>{row.row.department.departmentName}</span>}</span>
+          </>
+          )}
     },
     {
       field: "date",

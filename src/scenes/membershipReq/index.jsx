@@ -155,7 +155,7 @@ const Team = () => {
 
   const checkbox = (Did) => {
     console.log(Did);
-setIdData(Did)
+    setIdData(Did)
     axios.get(`${url}get-request`, {
       params: {
         _id: Did
@@ -250,8 +250,8 @@ setIdData(Did)
       })
       //    refresh componenet 
       getAllData();
-      // getAllDataUnapprove();
-      // getAllDataApprove();
+      getAllDataUnapprove();
+      getAllDataApprove();
     })
       .catch(err => {
         console.log(err)
@@ -284,48 +284,78 @@ setIdData(Did)
       approvalStatus: true
     }, { headers }).then(response => {
       console.log(response)
-      setOpenAdd(false);
-      // Membership Req approved 
-       axios.put(`${url}update-approval-status`, {
-      _id: IdData,
-      approvalStatus: 'true'
-    }, { headers }).then(response => {
-      console.log(response);
-      console.log('working fine')
-      
-      //    refresh componenet 
-      getAllData();
-      getAllDataUnapprove();
-      getAllDataApprove();
-    })
-      .catch(err => {
-        console.log(err)
-      })
+      if (response.data.message === 'Already Exist President or General Secretary for this department,forum,userRole') {
+        setOpenAdd(false)
+        console.log('rhrh')
+        let timerInterval
+        Swal.fire({
+          title: 'Already Exist President or General Secretary for this department,forum,userRole',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+            // getAllData();
+            // getAllDataApprove();
+            // getAllDataUnapprove();
+          }
+        })
+      } else {
+        setOpenAdd(false);
+        // Membership Req approved 
+        axios.put(`${url}update-approval-status`, {
+          _id: IdData,
+          approvalStatus: 'true'
+        }, { headers }).then(response => {
+          console.log(response);
+          console.log('working fine')
 
-      let timerInterval
-      Swal.fire({
-        title: 'Created and Approved Request Successfully',
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
+          //    refresh componenet 
           getAllData();
-          getAllDataApprove();
           getAllDataUnapprove();
-        }
-      })
+          getAllDataApprove();
+        })
+          .catch(err => {
+            console.log(err)
+          })
+
+        let timerInterval
+        Swal.fire({
+          title: 'Created and Approved Request Successfully',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+            getAllData();
+            getAllDataApprove();
+            getAllDataUnapprove();
+          }
+        })
+      }
+
     })
       .catch(err => {
         console.log(err)
@@ -501,7 +531,7 @@ setIdData(Did)
     },
     {
       field: "email",
-      headerName: "Age",
+      headerName: "Email",
       // type: "number",
       headerAlign: "left",
       align: "left",
@@ -733,15 +763,15 @@ setIdData(Did)
 
       </Box>
       <Box m="20px">
-      <Grid container spacing={2} >
+        <Grid container spacing={2} >
           <Grid item xs={12} md={10} mt>
-        <Header title="Membership Requests" subtitle="Managing the Membership Requests" />
+            <Header title="Membership Requests" subtitle="Managing the Membership Requests" />
 
-            </Grid>
-        <Grid item xs={12} md={2} mt> 
-          <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('http://teamsuit.co/welfare/membership.php')}>
-          Add
-        </Button></Grid>
+          </Grid>
+          <Grid item xs={12} md={2} mt>
+            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('http://teamsuit.co/welfare/membership.php')}>
+              Add
+            </Button></Grid>
         </Grid>
 
         <Box sx={{ width: '100%' }}>
