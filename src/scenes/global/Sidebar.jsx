@@ -15,6 +15,7 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   return (
@@ -107,6 +108,13 @@ const Sidebar = () => {
               title="Membership Requests"
               to="/membershipRequests"
               icon={<CardMembershipIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Uc Group Requests"
+              to="/UcGroupRequests"
+              icon={<GroupWorkIcon />}
               selected={selected}
               setSelected={setSelected}
             />

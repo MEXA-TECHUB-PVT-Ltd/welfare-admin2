@@ -133,7 +133,9 @@ function Login() {
                 submitHandler
     
               } style={btn} >
-                {loading1 ? <ClipLoader color={color} loading={loading1} css={override} size={10} /> : <h3>Login</h3>}
+                {loading1 ? 
+                <ClipLoader color={color} loading={loading1} css={override} size={10} />
+                 : <h3>Login</h3>}
               </Button>
     
               <br />
