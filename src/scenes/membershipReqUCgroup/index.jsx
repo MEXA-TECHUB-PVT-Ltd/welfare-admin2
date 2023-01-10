@@ -118,86 +118,60 @@ const Team = () => {
   const [districtAll, setDistrictAll] = useState([]);
   const [PPAll, setPPAll] = useState([]);
   const [UCAll, setUCAll] = useState([]);
-  const [UnitAll, setUnitAll] = useState([]);
-  const [EditFieldData, setEditFieldData] = useState([]);
-  const [image, setimage] = useState([]);
   const [email, setemail] = useState([]);
-  const [gender, setgender] = useState([]);
+
+  const [fatherName, setfatherName] = useState([]);
+
+
   const [dob, setDob] = useState([]);
   const [name, setName] = useState([]);
-  const [profession, setprofession] = useState([]);
+  const [groupRoles, setgroupRoles] = useState('');
+
   const [userType, setuserType] = useState('')
   const [DistrictArea, setDistrictArea] = useState('')
-  const [forum, setforum] = useState('')
-  const [role, setrole] = useState('')
-  const [department, setdepartment] = useState('')
+  const [educationalQualification, seteducationalQualification] = useState('')
+  const [RafaqatNo, setRafaqatNo] = useState('')
+  const [address, setaddress] = useState('')
+  const [profession, setprofession] = useState('')
+  const [mobileWhatsapNo, setmobileWhatsapNo] = useState('')
+  const [nameAndSignature, setnameAndSignature] = useState('')
   const [PPArea, setPPArea] = useState('')
   const [UCArea, setUCArea] = useState('')
-  const [UnitArea, setUnitArea] = useState('')
   const [IdData, setIdData] = useState('')
   // Approve 
-  const [password, setPassword] = useState('');
 
   const checkbox = (Did) => {
     console.log(Did);
-    // setIdData(Did)
-    // axios.get(`${url}get-request`, {
-    //   params: {
-    //     _id: Did
-    //   }
-    // }).then(response => {
-    //   console.log('response')
-    //   console.log(response);
-    //   setemail(response.data.email)
-    //   setgender(response.data.gender)
-    //   setName(response.data.name)
-    //   setDob(response.data.dob)
-    //   setprofession(response.data.profession)
-   
-    //   setOpenAdd(true)
+    setIdData(Did)
+    axios.get(`${url}get-group-request`, {
+      params: {
+        _id: Did
+      }
+    }).then(response => {
+      console.log('response')
+      console.log(response.data);
+      setemail(response.data.email)
+      setName(response.data.name)
+      setfatherName(response.data.fatherName)
+      setDob(response.data.DateOfForm)
+      setgroupRoles(response.data.GroupRoles)
+      setDistrictArea(response.data.DistrictArea._id)
+      setPPArea(response.data.PPArea._id)
+      setUCArea(response.data.UCArea._id)
+      seteducationalQualification(response.data.educationalQualification)
+      setRafaqatNo(response.data.RafaqatNo)
+      setaddress(response.data.address)
+      setprofession(response.data.profession)
+      setmobileWhatsapNo(response.data.mobileWhatsapNo)
+      setnameAndSignature(response.data.nameAndSignature)
+      setuserType(response.data.userType)
+      setOpenAdd(true)
 
-    // })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    axios.put(`${url}update-group-approval-status`, {
-      _id: Did,
-      ApprovedStatus: 'true'
-    }, { headers }).then(response => {
-      console.log(response);
-      console.log('working fine')
-      let timerInterval
-      Swal.fire({
-        title: 'Please wait!',
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer111')
-          // add member
-
-
-        }
-      })
-      //    refresh componenet 
-      getAllData();
-      getAllDataUnapprove();
-      getAllDataApprove();
     })
       .catch(err => {
         console.log(err)
       })
+
 
   
   }
@@ -252,22 +226,24 @@ const Team = () => {
   }
   const handleCloseAdd = () => setOpenAdd(false);
   const submitHandler1 = () => {
-    axios.post(`${url}create-user`, {
+    axios.post(`${url}create-Uc-User-Group`, {
       // id:1,
       name: name,
-      email: email,
-      dob: dob,
-      password: password,
-      profession: profession,
-      role: role,
+      fatherName: fatherName,
       userType: userType,
       DistrictArea: DistrictArea,
       PPArea: PPArea,
       UCArea: UCArea,
-      UnitArea: UnitArea,
-      forum: forum,
-      department: department,
-      approvalStatus: true
+      educationalQualification: educationalQualification,
+      RafaqatNo: RafaqatNo,
+      address: address,
+      profession: profession,
+      mobileWhatsapNo: mobileWhatsapNo,
+      email: email,
+      GroupRoles: groupRoles,
+      DateOfForm: dob,
+      nameAndSignature:nameAndSignature
+
     }, { headers }).then(response => {
       console.log(response)
       if (response.data.message === 'Already Exist President or General Secretary for this department,forum,userRole') {
@@ -300,9 +276,9 @@ const Team = () => {
       } else {
         setOpenAdd(false);
         // Membership Req approved 
-        axios.put(`${url}update-approval-status`, {
+        axios.put(`${url}update-group-approval-status`, {
           _id: IdData,
-          approvalStatus: 'true'
+          ApprovedStatus: 'true'
         }, { headers }).then(response => {
           console.log(response);
           console.log('working fine')
@@ -642,17 +618,7 @@ const Team = () => {
       .catch(error => console.error(`Error:${error}`));
 
   }
-  const getAllDataUnit = () => {
-    axios.get(`${url}get-all-unit`)
-      .then((response) => {
-        const allData = response.data;
-        console.log(allData);
-        setUnitAll(response.data);
 
-      })
-      .catch(error => console.error(`Error:${error}`));
-
-  }
   useEffect(() => {
     getAllData();
     getAllDataUnapprove();
@@ -661,7 +627,6 @@ const Team = () => {
     getAllDataDistrict();
     getAllDataPP();
     getAllDataUC();
-    getAllDataUnit();
 
   }, []);
   return (
@@ -678,14 +643,15 @@ const Team = () => {
       </Box>
       <Box m="20px">
         <Grid container spacing={2} >
-          <Grid item xs={12} md={10} mt>
+          <Grid item xs={12} md={12} mt>
             <Header title="UC Group Requests" subtitle="Managing the UC Group Requests" />
 
           </Grid>
-          <Grid item xs={12} md={2} mt>
+          {/* <Grid item xs={12} md={2} mt>
             <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('http://teamsuit.co/welfare/membership.php')}>
               Add
-            </Button></Grid>
+            </Button>
+            </Grid> */}
         </Grid>
 
         <Box sx={{ width: '100%' }}>
@@ -848,7 +814,7 @@ const Team = () => {
                 <Grid container spacing={2} >
                   <Grid item xs={12} md={12} mt>
                     <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
-                      Add Member
+                      Add UC Group Member
                     </Typography>
                   </Grid>
                   <Grid item xs={6} md={3}>
@@ -864,18 +830,7 @@ const Team = () => {
                       style={{ width: '100%' }} variant="outlined" />
 
                   </Grid>
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Password :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <TextField
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      style={{ width: '100%' }} variant="outlined" />
-
-                  </Grid>
+                
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                       Email :
@@ -891,7 +846,7 @@ const Team = () => {
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Dob :
+                      Date of Form :
                     </Typography>
                   </Grid>
                   <Grid item xs={6} md={3}>
@@ -901,33 +856,6 @@ const Team = () => {
                       // type="number"
                       onChange={(e) => setDob(e.target.value)}
                       style={{ width: '100%' }} variant="outlined" />
-
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Forum :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Forum</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={forum}
-                        label="forum"
-                        onChange={(e) => setforum(e.target.value)}
-                      >
-                        <MenuItem value='TMQ'>TMQ</MenuItem>
-                        <MenuItem value='PAT'>PAT</MenuItem>
-                        <MenuItem value='MWL'>MWL</MenuItem>
-                        <MenuItem value='MUC'>MUC</MenuItem>
-                        <MenuItem value='MYL'>MYL</MenuItem>
-                        <MenuItem value='MSM'>MSM</MenuItem>
-
-                      </Select>
-                    </FormControl>
-
 
                   </Grid>
                   <Grid item xs={6} md={3}>
@@ -942,66 +870,22 @@ const Team = () => {
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={role}
+                        value={groupRoles}
                         label="Role"
-                        onChange={(e) => setrole(e.target.value)}
+                        onChange={(e) => setgroupRoles(e.target.value)}
                       >
-                        <MenuItem value='Executive Member'>Executive Member</MenuItem>
-                        <MenuItem value='General Secretary'>General Secretary</MenuItem>
-                        <MenuItem value='President'>President</MenuItem>
+                        <MenuItem value='صد ر'>صد ر</MenuItem>
+                        <MenuItem value='ناظم'>ناظم</MenuItem>
+                        <MenuItem value='ناظم دعوت'>ناظم دعوت</MenuItem>
+                        <MenuItem value='ناظم تربیت'>ناظم تربیت</MenuItem>
+                        <MenuItem value='ناظم ممبرشپ'>ناظم ممبرشپ</MenuItem>
+                        <MenuItem value='ناظم مالیات'>ناظم مالیات</MenuItem>
+                        <MenuItem value='ناظم سوشل میڈیا'>ناظم سوشل میڈیا</MenuItem>
 
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Department :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Department</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={department}
-                        label="Department"
-                        onChange={(e) => setdepartment(e.target.value)}
-                      >
-                        {dataDept.map((row) => (
-                          <MenuItem value={row._id}>{row.departmentName}</MenuItem>
-                        ))}
-
-                      </Select>
-                    </FormControl>
-
-
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      User Type :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">User Type</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={userType}
-                        label="User Type"
-                        onChange={(e) => setuserType(e.target.value)}
-                      >
-                        <MenuItem value='District'>District</MenuItem>
-                        <MenuItem value='Province'>Province</MenuItem>
-                        <MenuItem value='UC'>UC</MenuItem>
-                        <MenuItem value='Unit'>Unit</MenuItem>
-
-                      </Select>
-                    </FormControl>
-
-
-                  </Grid>
+                
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                       District Area :
@@ -1014,6 +898,7 @@ const Team = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={DistrictArea}
+                        
                         label="District Area"
                         onChange={(e) => setDistrictArea(e.target.value)}
                       >
@@ -1082,34 +967,7 @@ const Team = () => {
                       style={{ width: '100%' }} variant="outlined" /> */}
 
                   </Grid>
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Unit Area :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Unit Area</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={UnitArea}
-                        label="Unit Area"
-                        onChange={(e) => setUnitArea(e.target.value)}
-                      >
-                        {UnitAll.map((row) => (
-                          <MenuItem value={row._id}>{row.name}</MenuItem>
-                        ))}
-
-                      </Select>
-                    </FormControl>
-                    {/* <TextField
-
-                      value={UnitArea}
-                      onChange={(e) => setUnitArea(e.target.value)}
-                      style={{ width: '100%' }} variant="outlined" /> */}
-
-                  </Grid>
+                
 
                   <Grid item xs={12} md={12} align="center">
                     <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler1()}>

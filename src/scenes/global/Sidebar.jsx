@@ -16,6 +16,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   return (
@@ -122,6 +123,13 @@ const Sidebar = () => {
               title="Manage Members"
               to="/manageMembers"
               icon={<GroupsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Item
+              title="UC Group Members"
+              to="/UCGroupMembers"
+              icon={<PeopleOutlineIcon />}
               selected={selected}
               setSelected={setSelected}
             />

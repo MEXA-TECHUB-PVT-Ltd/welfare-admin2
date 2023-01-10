@@ -91,7 +91,7 @@ const Team = () => {
           <Link underline="hover" color="inherit" href="/home">
             <HomeIcon />
           </Link>
-          <Link underline="hover" color="inherit" href="/membershipRequests">
+          <Link underline="hover" color="inherit" href="/UcGroupRequests">
             <Typography color="text.primary">UC Group Requests</Typography>
 
           </Link>
