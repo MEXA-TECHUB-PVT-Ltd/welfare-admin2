@@ -22,6 +22,8 @@ import PdfViewer from "./scenes/pdfView"
 import SettingsData from "./scenes/settingsData"
 import MembershipReqUcGroup from "./scenes/membershipReqUCgroup"
 import MembershipReqViewUcGroup from "./scenes/memberReqViewUCgroup"
+import UCGroupMembers from "./scenes/UCGroupMembers"
+import ManageMembersUcView from "./scenes/manageMembersUcView"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -53,6 +55,9 @@ function App() {
 
               <Route path="/UcGroupRequests" element={<MembershipReqUcGroup />} />
               <Route path="/membershipRequestsUcGroupView" element={<MembershipReqViewUcGroup />} />
+              <Route path="/UCGroupMembers" element={<UCGroupMembers />} />
+              <Route path="/manageMembersUcView" element={<ManageMembersUcView />} />
+
 
 
               <Route path="/membershipRequestsView" element={<MembershipReqView />} />
