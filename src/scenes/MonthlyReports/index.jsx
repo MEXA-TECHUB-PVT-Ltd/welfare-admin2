@@ -640,7 +640,7 @@ const Team = () => {
 
 
           <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-            {row.row.DistrictArea.name}
+            {row.row.DistrictArea===null?<span>Null</span>:row.row.DistrictArea.name}
           </Typography>
         );
       },
