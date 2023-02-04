@@ -20,6 +20,13 @@ const TextColor = {
   color: 'black',
   fontFamily: 'Roboto, sans-serif',
 }
+const Texthead={
+  fontWeight:700,
+  fontSize:'23px'
+}
+const Texthead1={
+  fontWeight:700,
+}
 const override = {
   display: ' block',
   margin: '0 auto',
@@ -138,6 +145,19 @@ const Team = () => {
                             </TableCell>
 
                           </TableRow> */}
+                            <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                      
+                            <TableCell style={Texthead} component="th" scope="row">
+                            صد ر
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
@@ -146,7 +166,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.name}
+                              {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].name}</span>}
 
                             </TableCell>
 
@@ -159,12 +181,13 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.fatherName}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].fatherName}</span>}
 
                             </TableCell>
 
                           </TableRow>
-
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
@@ -173,12 +196,13 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.email}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].email}</span>}
 
                             </TableCell>
 
                           </TableRow>
-                           {/* Second row  */}
                            <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
@@ -187,13 +211,13 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.profession}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].profession}</span>}
 
                             </TableCell>
 
                           </TableRow>
-
-                           {/* Second row  */}
                            <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
@@ -203,7 +227,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.mobileWhatsapNo}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -216,7 +242,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.educationalQualification}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -229,20 +257,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.address}
-
-                            </TableCell>
-
-                          </TableRow>
-                          <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell style={TextColor} component="th" scope="row">
-                            Group Roles
-
-                            </TableCell>
-                            <TableCell style={TextColor} component="th" scope="row">
-                              {data.GroupRoles}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].address}</span>}
 
                             </TableCell>
 
@@ -256,7 +273,129 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.RafaqatNo}
+                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                                NULL
+                              </span>:<span>{data.صدر[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                            <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                      
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                              {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].address}</span>}
 
                             </TableCell>
 
@@ -266,6 +405,703 @@ const Team = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظم[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                      
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم دعوت
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].address}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمدعوت[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                    
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم تربیت
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].address}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمتربیت[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+
+                          
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                      
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم ممبرشپ
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].address}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمممبرشپ[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                     
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم مالیات:
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].address}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظممالیات[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                                      
+                            <TableCell style={Texthead} component="th" scope="row">
+                            ناظم سوشل میڈیا:
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            
+
+                            </TableCell>
+                            </TableRow>
+                          
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].name}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Father Name
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].fatherName}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Email
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].email}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                              Profession
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].profession}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                           <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Mobile No (WhatsApp)
+
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].mobileWhatsapNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Educational Qualification
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].educationalQualification}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                             Address
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].address}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+                         
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={TextColor} component="th" scope="row">
+                            Rafaqat No
+
+                            </TableCell>
+                            <TableCell style={TextColor} component="th" scope="row">
+                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                                NULL
+                              </span>:<span>{data.ناظمسوشلمیڈیا[0].RafaqatNo}</span>}
+
+                            </TableCell>
+
+                          </TableRow>
+
+
+
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell style={Texthead1} component="th" scope="row">
                             User Type
 
                             </TableCell>
@@ -279,12 +1115,12 @@ const Team = () => {
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
-                            <TableCell style={TextColor} component="th" scope="row">
+                            <TableCell style={Texthead1} component="th" scope="row">
                             District Area
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {data.DistrictArea===undefined?<span>Null</span>:data.DistrictArea.name}
+                              {(data.DistrictArea===undefined)||(data.DistrictArea===null)||(data.DistrictArea==='')?<span>Null</span>:data.DistrictArea.name}
 
                             </TableCell>
 
@@ -292,12 +1128,12 @@ const Team = () => {
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
-                            <TableCell style={TextColor} component="th" scope="row">
+                            <TableCell style={Texthead1} component="th" scope="row">
                             PPArea
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {data.PPArea===undefined?<span>Null</span>:data.PPArea.name}
+                            {(data.PPArea===undefined)||(data.PPArea===null)||(data.PPArea==='')?<span>Null</span>:data.PPArea.name}
 
 
                             </TableCell>
@@ -306,12 +1142,12 @@ const Team = () => {
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
-                            <TableCell style={TextColor} component="th" scope="row">
+                            <TableCell style={Texthead1} component="th" scope="row">
                             UC Area
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {data.UCArea===undefined?<span>Null</span>:data.UCArea.name}
+                            {(data.UCArea===undefined)||(data.UCArea===null)||(data.UCArea==='')?<span>Null</span>:data.UCArea.name}
 
 
                             </TableCell>
@@ -320,7 +1156,7 @@ const Team = () => {
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
-                            <TableCell style={TextColor} component="th" scope="row">
+                            <TableCell style={Texthead1} component="th" scope="row">
                             Unit Area
 
                             </TableCell>
@@ -334,7 +1170,7 @@ const Team = () => {
                           <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
-                            <TableCell style={TextColor} component="th" scope="row">
+                            <TableCell style={Texthead1} component="th" scope="row">
                             Date of Form
 
                             </TableCell>

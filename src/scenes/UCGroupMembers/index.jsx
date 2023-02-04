@@ -272,29 +272,28 @@ const Team = () => {
   }
   const columns = [
     // { field: "_id", headerName: "ID" },
+    // {
+    //   field: "ref_no",
+    //   headerName: "ref_no",
+    //   flex: 1,
+    // },
+    // {
+    //   field: "email",
+    //   headerName: "Email",
+    //   // type: "number",
+    //   headerAlign: "left",
+    //   align: "left",
+    // },
     {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      // cellClassName: "name-column--cell",
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      // type: "number",
-      flex: 1,
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "RafaqatNo",
-      headerName: "Rafaqat No",
+      field: "userType",
+      headerName: "userType",
       flex: 1,
     },
+
     {
-      field: "mobileWhatsapNo",
-      headerName: "Mobile No( WhatsApp )",
-      flex: 1,
+      field: "DateOfForm",
+      headerName: "DateOfForm",
+      flex: 2,
     },
     {
       field: "DistrictArea",
@@ -302,9 +301,10 @@ const Team = () => {
       flex: 1,
       renderCell: (row) => {
         return (
-          <>
-            <span>{row.row.DistrictArea === undefined ? <span>NUll</span> : <span>{row.row.DistrictArea.name}</span>}</span>
-          </>
+          <>{(row.row.DistrictArea === null) ||
+            (row.row.DistrictArea === undefined) ||
+            (row.row.DistrictArea === '') ? <span>NULL</span> :
+            <span>{row.row.DistrictArea.name}</span>}</>
         )
       }
     },
@@ -314,9 +314,10 @@ const Team = () => {
       flex: 1,
       renderCell: (row) => {
         return (
-          <>
-            <span>{row.row.PPArea === undefined ? <span>NUll</span> : <span>{row.row.PPArea.name}</span>}</span>
-          </>
+          <>{(row.row.PPArea === null) ||
+            (row.row.PPArea === undefined) ||
+            (row.row.PPArea === '') ? <span>NULL</span> :
+            <span>{row.row.PPArea.name}</span>}</>
         )
       }
     },
@@ -326,16 +327,12 @@ const Team = () => {
       flex: 1,
       renderCell: (row) => {
         return (
-          <>
-            <span>{row.row.UCArea === undefined ? <span>NUll</span> : <span>{row.row.UCArea.name}</span>}</span>
-          </>
+          <>{(row.row.UCArea === null) ||
+            (row.row.UCArea === undefined) ||
+            (row.row.UCArea === '') ? <span>NULL</span> :
+            <span>{row.row.UCArea.name}</span>}</>
         )
       }
-    },
-    {
-      field: "GroupRoles",
-      headerName: "Group Roles",
-      flex: 1,
     },
    
     {
@@ -346,11 +343,11 @@ const Team = () => {
         return (
           <>
             
-            <IconButton onClick={() => handleOpenUpdate(row.row._id)}>
+            {/* <IconButton onClick={() => handleOpenUpdate(row.row._id)}>
               <Tooltip title="Edit">
                 <EditIcon />
               </Tooltip>
-            </IconButton>
+            </IconButton> */}
             <IconButton onClick={() => handleClickOpen(row.row._id)}>
               <Tooltip title="View">
                 <VisibilityIcon />
