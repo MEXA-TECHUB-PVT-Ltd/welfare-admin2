@@ -118,28 +118,79 @@ const Team = () => {
   const [districtAll, setDistrictAll] = useState([]);
   const [PPAll, setPPAll] = useState([]);
   const [UCAll, setUCAll] = useState([]);
-  const [email, setemail] = useState([]);
-
-  const [fatherName, setfatherName] = useState([]);
-
-
   const [dob, setDob] = useState([]);
-  const [name, setName] = useState([]);
-  const [groupRoles, setgroupRoles] = useState('');
+  const [ref_no, setRef_no] = useState([]);
+  // "صد ر
+  const [Sname, setSname] = useState([]);
+  const [SfatherName, setSfatherName] = useState([]);
+  const [SeducationalQualification, setSeducationalQualification] = useState([]);
+  const [SRafaqatNo, setSRafaqatNo] = useState([]);
+  const [Saddress, setSaddress] = useState([]);
+  const [Sprofession, setSprofession] = useState([]);
+  const [SmobileWhatsapNo, setSmobileWhatsapNo] = useState([]);
+  const [Semail, setSemail] = useState([]);
+  // 'ناظم'
+  const [Nname, setNname] = useState([]);
+  const [NfatherName, setNfatherName] = useState([]);
+  const [NeducationalQualification, setNeducationalQualification] = useState([]);
+  const [NRafaqatNo, setNRafaqatNo] = useState([]);
+  const [Naddress, setNaddress] = useState([]);
+  const [Nprofession, setNprofession] = useState([]);
+  const [NmobileWhatsapNo, setNmobileWhatsapNo] = useState([]);
+  const [Nemail, setNemail] = useState([]);
+  // 'ناظم دعوت'
+  const [NDname, setNDname] = useState([]);
+  const [NDfatherName, setNDfatherName] = useState([]);
+  const [NDeducationalQualification, setNDeducationalQualification] = useState([]);
+  const [NDRafaqatNo, setNDRafaqatNo] = useState([]);
+  const [NDaddress, setNDaddress] = useState([]);
+  const [NDprofession, setNDprofession] = useState([]);
+  const [NDmobileWhatsapNo, setNDmobileWhatsapNo] = useState([]);
+  const [NDemail, setNDemail] = useState([]);
+  // 'ناظم تربیت'
+  const [NTname, setNTname] = useState([]);
+  const [NTfatherName, setNTfatherName] = useState([]);
+  const [NTeducationalQualification, setNTeducationalQualification] = useState([]);
+  const [NTRafaqatNo, setNTRafaqatNo] = useState([]);
+  const [NTaddress, setNTaddress] = useState([]);
+  const [NTprofession, setNTprofession] = useState([]);
+  const [NTmobileWhatsapNo, setNTmobileWhatsapNo] = useState([]);
+  const [NTemail, setNTemail] = useState([]);
+  // 'ناظم ممبرشپ'
+  const [NMname, setNMname] = useState([]);
+  const [NMfatherName, setNMfatherName] = useState([]);
+  const [NMeducationalQualification, setNMeducationalQualification] = useState([]);
+  const [NMRafaqatNo, setNMRafaqatNo] = useState([]);
+  const [NMaddress, setNMaddress] = useState([]);
+  const [NMprofession, setNMprofession] = useState([]);
+  const [NMmobileWhatsapNo, setNMmobileWhatsapNo] = useState([]);
+  const [NMemail, setNMemail] = useState([]);
+  // 'ناظم مالیات'
+  const [NMAname, setNMAname] = useState([]);
+  const [NMAfatherName, setNMAfatherName] = useState([]);
+  const [NMAeducationalQualification, setNMAeducationalQualification] = useState([]);
+  const [NMARafaqatNo, setNMARafaqatNo] = useState([]);
+  const [NMAaddress, setNMAaddress] = useState([]);
+  const [NMAprofession, setNMAprofession] = useState([]);
+  const [NMAmobileWhatsapNo, setNMAmobileWhatsapNo] = useState([]);
+  const [NMAemail, setNMAemail] = useState([]);
+  // 'ناظم سوشل میڈیا' 
+  const [NSMAname, setNSMAname] = useState([]);
+  const [NSMAfatherName, setNSMAfatherName] = useState([]);
+  const [NSMAeducationalQualification, setNSMAeducationalQualification] = useState([]);
+  const [NSMARafaqatNo, setNSMARafaqatNo] = useState([]);
+  const [NSMAaddress, setNSMAaddress] = useState([]);
+  const [NSMAprofession, setNSMAprofession] = useState([]);
+  const [NSMAmobileWhatsapNo, setNSMAmobileWhatsapNo] = useState([]);
+  const [NSMAemail, setNSMAemail] = useState([]);
 
   const [userType, setuserType] = useState('')
   const [DistrictArea, setDistrictArea] = useState('')
-  const [educationalQualification, seteducationalQualification] = useState('')
-  const [RafaqatNo, setRafaqatNo] = useState('')
-  const [address, setaddress] = useState('')
-  const [profession, setprofession] = useState('')
-  const [mobileWhatsapNo, setmobileWhatsapNo] = useState('')
   const [nameAndSignature, setnameAndSignature] = useState('')
   const [PPArea, setPPArea] = useState('')
   const [UCArea, setUCArea] = useState('')
   const [IdData, setIdData] = useState('')
   // Approve 
-
   const checkbox = (Did) => {
     console.log(Did);
     setIdData(Did)
@@ -150,19 +201,85 @@ const Team = () => {
     }).then(response => {
       console.log('response')
       console.log(response.data);
-      setemail(response.data.email)
-      setName(response.data.name)
-      setfatherName(response.data.fatherName)
+      // GET 
+      setRef_no(response.data.ref_no)
+      setSname(response.data.صدر[0].name)
+      setSfatherName(response.data.صدر[0].fatherName)
+      setSeducationalQualification(response.data.صدر[0].educationalQualification)
+      setSaddress(response.data.صدر[0].address)
+      setSprofession(response.data.صدر[0].profession)
+
+      setSRafaqatNo(response.data.صدر[0].RafaqatNo)
+      setSmobileWhatsapNo(response.data.صدر[0].mobileWhatsapNo)
+      setSemail(response.data.صدر[0].email)
+
+      setNname(response.data.ناظم[0].name)
+      setNfatherName(response.data.صدر[0].fatherName)
+      setNeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNaddress(response.data.صدر[0].address)
+      setNprofession(response.data.صدر[0].profession)
+      setNRafaqatNo(response.data.ناظم[0].RafaqatNo)
+      setNmobileWhatsapNo(response.data.ناظم[0].mobileWhatsapNo)
+      setNemail(response.data.ناظم[0].email)
+
+      setNDname(response.data.ناظمدعوت[0].name)
+      setNDfatherName(response.data.صدر[0].fatherName)
+      setNDeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNDaddress(response.data.صدر[0].address)
+      setNDprofession(response.data.صدر[0].profession)
+      setNDRafaqatNo(response.data.ناظمدعوت[0].RafaqatNo)
+      setNDmobileWhatsapNo(response.data.ناظمدعوت[0].mobileWhatsapNo)
+      setNDemail(response.data.ناظمدعوت[0].email)
+
+      setNTname(response.data.ناظمتربیت[0].name)
+      setNTfatherName(response.data.صدر[0].fatherName)
+      setNTeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNTaddress(response.data.صدر[0].address)
+      setNTprofession(response.data.صدر[0].profession)
+      setNTRafaqatNo(response.data.ناظمتربیت[0].RafaqatNo)
+      setNTmobileWhatsapNo(response.data.ناظمتربیت[0].mobileWhatsapNo)
+      setNTemail(response.data.ناظمتربیت[0].email)
+
+      setNMname(response.data.ناظمممبرشپ[0].name)
+      setNMfatherName(response.data.صدر[0].fatherName)
+      setNMeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNMaddress(response.data.صدر[0].address)
+      setNMprofession(response.data.صدر[0].profession)
+      setNMRafaqatNo(response.data.ناظمممبرشپ[0].RafaqatNo)
+      setNMmobileWhatsapNo(response.data.ناظمممبرشپ[0].mobileWhatsapNo)
+      setNMemail(response.data.ناظمممبرشپ[0].email)
+
+      setNMAname(response.data.ناظممالیات[0].name)
+      setNMAfatherName(response.data.صدر[0].fatherName)
+      setNMAeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNMAaddress(response.data.صدر[0].address)
+      setNMAprofession(response.data.صدر[0].profession)
+      setNMARafaqatNo(response.data.ناظممالیات[0].RafaqatNo)
+      setNMAmobileWhatsapNo(response.data.ناظممالیات[0].mobileWhatsapNo)
+      setNMAemail(response.data.ناظممالیات[0].email)
+
+      setNSMAname(response.data.ناظمسوشلمیڈیا[0].name)
+      setNSMAfatherName(response.data.صدر[0].fatherName)
+      setNSMAeducationalQualification(response.data.صدر[0].educationalQualification)
+      setNSMAaddress(response.data.صدر[0].address)
+      setNSMAprofession(response.data.صدر[0].profession)
+      setNSMARafaqatNo(response.data.ناظمسوشلمیڈیا[0].RafaqatNo)
+      setNSMAmobileWhatsapNo(response.data.ناظمسوشلمیڈیا[0].mobileWhatsapNo)
+      setNSMAemail(response.data.ناظمسوشلمیڈیا[0].email)
+
+      // setemail(response.data.email)
+      // setName(response.data.name)
+      // setfatherName(response.data.fatherName)
       setDob(response.data.DateOfForm)
-      setgroupRoles(response.data.GroupRoles)
+      // setgroupRoles(response.data.GroupRoles)
       setDistrictArea(response.data.DistrictArea._id)
       setPPArea(response.data.PPArea._id)
       setUCArea(response.data.UCArea._id)
-      seteducationalQualification(response.data.educationalQualification)
-      setRafaqatNo(response.data.RafaqatNo)
-      setaddress(response.data.address)
-      setprofession(response.data.profession)
-      setmobileWhatsapNo(response.data.mobileWhatsapNo)
+      // seteducationalQualification(response.data.educationalQualification)
+      // setRafaqatNo(response.data.RafaqatNo)
+      // setaddress(response.data.address)
+      // setprofession(response.data.profession)
+      // setmobileWhatsapNo(response.data.mobileWhatsapNo)
       setnameAndSignature(response.data.nameAndSignature)
       setuserType(response.data.userType)
       setOpenAdd(true)
@@ -173,7 +290,7 @@ const Team = () => {
       })
 
 
-  
+
   }
 
   const checkbox1 = (Did) => {
@@ -226,21 +343,89 @@ const Team = () => {
   }
   const handleCloseAdd = () => setOpenAdd(false);
   const submitHandler1 = () => {
+    console.log(ref_no)
     axios.post(`${url}create-Uc-User-Group`, {
       // id:1,
-      name: name,
-      fatherName: fatherName,
-      userType: userType,
-      DistrictArea: DistrictArea,
-      PPArea: PPArea,
-      UCArea: UCArea,
-      educationalQualification: educationalQualification,
-      RafaqatNo: RafaqatNo,
-      address: address,
-      profession: profession,
-      mobileWhatsapNo: mobileWhatsapNo,
-      email: email,
-      GroupRoles: groupRoles,
+      ref_no:ref_no,
+      userType:userType,
+      DistrictArea:DistrictArea,
+      PPArea:PPArea,
+      UCArea:UCArea,
+
+      Sname: Sname,
+      SfatherName:SfatherName,
+      SeducationalQualification:SeducationalQualification,
+      SRafaqatNo:SRafaqatNo,
+      Saddress:Saddress,
+      Sprofession:Sprofession,
+      SmobileWhatsapNo:SmobileWhatsapNo,
+      Semail:Semail,
+
+      Nname: Nname,
+      NfatherName:NfatherName,
+      NeducationalQualification:NeducationalQualification,
+      NRafaqatNo:NRafaqatNo,
+      Naddress:Naddress,
+      Nprofession:Nprofession,
+      NmobileWhatsapNo:NmobileWhatsapNo,
+      Nemail:Nemail,
+
+      NDname:NDname,
+      NDfatherName:NDfatherName,
+      NDeducationalQualification:NDeducationalQualification,
+      NDRafaqatNo:NDRafaqatNo,
+      NDaddress:NDaddress,
+      NDprofession:NDprofession,
+      NDmobileWhatsapNo:NDmobileWhatsapNo,
+      NDemail:NDemail,
+
+      NTname: NTname,
+      NTfatherName:NTfatherName,
+      NTeducationalQualification:NTeducationalQualification,
+      NTRafaqatNo:NTRafaqatNo,
+      NTaddress:NTaddress,
+      NTprofession:NTprofession,
+      NTmobileWhatsapNo:NTmobileWhatsapNo,
+      NTemail:NTemail,
+
+      NMname: NMname,
+      NMfatherName:NMfatherName,
+      NMeducationalQualification:NMeducationalQualification,
+      NMRafaqatNo:NMRafaqatNo,
+      NMaddress:NMaddress,
+      NMprofession:NMprofession,
+      NMmobileWhatsapNo:NMmobileWhatsapNo,
+      NMemail:NMemail,
+
+      NMAname: NMAname,
+      NMAfatherName:NMAfatherName,
+      NMAeducationalQualification:NMAeducationalQualification,
+      NMARafaqatNo:NMARafaqatNo,
+      NMAaddress:NMAaddress,
+      NMAprofession:NMAprofession,
+      NMAmobileWhatsapNo:NMAmobileWhatsapNo,
+      NMAemail:NMAemail,
+
+      NSMname:NSMAname,
+      NSMfatherName:NSMAfatherName,
+      NSMeducationalQualification:NSMAeducationalQualification,
+      NSMRafaqatNo:NSMARafaqatNo,
+      NSMaddress:NSMAaddress,
+      NSMprofession :NSMAprofession,
+      NSMmobileWhatsapNo:NSMAmobileWhatsapNo,
+      NSMemail:NSMAemail,
+
+      // name: name,
+      // fatherName: fatherName,
+
+      // educationalQualification: educationalQualification,
+      // RafaqatNo: RafaqatNo,
+      // address: address,
+      // profession: profession,
+      // mobileWhatsapNo: mobileWhatsapNo,
+      // email: email,
+      // GroupRoles: groupRoles,
+
       DateOfForm: dob,
       nameAndSignature:nameAndSignature
 
@@ -322,7 +507,7 @@ const Team = () => {
       .catch(err => {
         console.log(err)
       })
-  
+
 
   }
   // Update 
@@ -409,33 +594,72 @@ const Team = () => {
   };
   const columns = [
     {
-      field: "name",
-      headerName: "Name",
+      field: "ref_no",
+      headerName: "ref_no",
       flex: 1,
     },
-    {
-      field: "email",
-      headerName: "Email",
-      // type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
+    // {
+    //   field: "email",
+    //   headerName: "Email",
+    //   // type: "number",
+    //   headerAlign: "left",
+    //   align: "left",
+    // },
     {
       field: "userType",
       headerName: "userType",
       flex: 1,
     },
-   
+
     {
       field: "DateOfForm",
       headerName: "DateOfForm",
       flex: 2,
     },
     {
-      field: "GroupRoles",
-      headerName: "GroupRoles",
+      field: "DistrictArea",
+      headerName: "DistrictArea",
       flex: 1,
+      renderCell: (row) => {
+        return (
+          <>{(row.row.DistrictArea === null) ||
+            (row.row.DistrictArea === undefined) ||
+            (row.row.DistrictArea === '') ? <span>NULL</span> :
+            <span>{row.row.DistrictArea.name}</span>}</>
+        )
+      }
     },
+    {
+      field: "PPArea",
+      headerName: "PPArea",
+      flex: 1,
+      renderCell: (row) => {
+        return (
+          <>{(row.row.PPArea === null) ||
+            (row.row.PPArea === undefined) ||
+            (row.row.PPArea === '') ? <span>NULL</span> :
+            <span>{row.row.PPArea.name}</span>}</>
+        )
+      }
+    },
+    {
+      field: "UCArea",
+      headerName: "UCArea",
+      flex: 1,
+      renderCell: (row) => {
+        return (
+          <>{(row.row.UCArea === null) ||
+            (row.row.UCArea === undefined) ||
+            (row.row.UCArea === '') ? <span>NULL</span> :
+            <span>{row.row.UCArea.name}</span>}</>
+        )
+      }
+    },
+    // {
+    //   field: "GroupRoles",
+    //   headerName: "GroupRoles",
+    //   flex: 1,
+    // },
     {
       field: "ApprovedStatus",
       headerName: "Approval Status",
@@ -647,11 +871,11 @@ const Team = () => {
             <Header title="UC Group Requests" subtitle="Managing the UC Group Requests" />
 
           </Grid>
-          {/* <Grid item xs={12} md={2} mt>
-            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('http://teamsuit.co/welfare/membership.php')}>
+          <Grid item xs={12} md={2} mt>
+            <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => window.open('https://teamsuit.co/welfare/create-group-req.php')}>
               Add
             </Button>
-            </Grid> */}
+            </Grid>
         </Grid>
 
         <Box sx={{ width: '100%' }}>
@@ -814,36 +1038,24 @@ const Team = () => {
                 <Grid container spacing={2} >
                   <Grid item xs={12} md={12} mt>
                     <Typography variant="h2" style={{ color: '#52ad4a', fontWeight: 700 }} gutterBottom>
-                      Add UC Group Member
+                      Add UC Group Members
                     </Typography>
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Name :
+                      Ref No :
                     </Typography>
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <TextField
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      disabled
+                      value={ref_no}
+
+                      // type="number"
+                      onChange={(e) => setRef_no(e.target.value)}
                       style={{ width: '100%' }} variant="outlined" />
 
                   </Grid>
-                
-                  <Grid item xs={6} md={3}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                      Email :
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={3}>
-                    <TextField
-                      disabled
-                      value={email}
-                      onChange={(e) => setemail(e.target.value)}
-                      style={{ width: '100%' }} variant="outlined" />
 
-                  </Grid>
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                       Date of Form :
@@ -859,6 +1071,20 @@ const Team = () => {
 
                   </Grid>
                   <Grid item xs={6} md={3}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                      Name And Signature :
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <TextField
+                      value={nameAndSignature}
+                      disabled
+                      // type="number"
+                      onChange={(e) => setnameAndSignature(e.target.value)}
+                      style={{ width: '100%' }} variant="outlined" />
+
+                  </Grid>
+                  {/* <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                       Roles :
                     </Typography>
@@ -884,8 +1110,8 @@ const Team = () => {
 
                       </Select>
                     </FormControl>
-                  </Grid>
-                
+                  </Grid> */}
+
                   <Grid item xs={6} md={3}>
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                       District Area :
@@ -898,7 +1124,7 @@ const Team = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={DistrictArea}
-                        
+
                         label="District Area"
                         onChange={(e) => setDistrictArea(e.target.value)}
                       >
@@ -967,7 +1193,7 @@ const Team = () => {
                       style={{ width: '100%' }} variant="outlined" /> */}
 
                   </Grid>
-                
+
 
                   <Grid item xs={12} md={12} align="center">
                     <Button variant="contained" style={{ backgroundColor: '#52ad4a' }} onClick={() => submitHandler1()}>
