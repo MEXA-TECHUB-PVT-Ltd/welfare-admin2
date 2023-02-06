@@ -66,6 +66,7 @@ const Team = () => {
  
   //Get API Axios
   const [data, setData] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const getAllData = async () => {
     const phoneNo = state.post_id;
@@ -75,7 +76,9 @@ const Team = () => {
         }
     }).then(response => {
         console.log('response')
-        console.log(response);
+        console.log('response11111')
+
+        console.log(response.data.saddar);
         setData(response.data);
         console.log(data);
         setLoading(false)
@@ -111,9 +114,9 @@ const Team = () => {
           <>
             {/* AppBAr  */}
             <ClipLoader color={color} loading={loading} css={override} size={30} />
-            {console.log(state.post_id)}
+            {/* {console.log(state.post_id)}
             {console.log('state data id')}
-            {console.log(state.data)}
+            {console.log(state.data)} */}
             <Grid container spacing={2} >
               <Grid item xs={12} md={12} >
                 <Grid container spacing={2}>
@@ -166,9 +169,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                              {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].name}</span>}
+                              </span>:<span>{data.saddar[0].name}</span>}
 
                             </TableCell>
 
@@ -181,9 +184,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].fatherName}</span>}
+                              </span>:<span>{data.saddar[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -196,9 +199,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].email}</span>}
+                              </span>:<span>{data.saddar[0].email}</span>}
 
                             </TableCell>
 
@@ -211,9 +214,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].profession}</span>}
+                              </span>:<span>{data.saddar[0].profession}</span>}
 
                             </TableCell>
 
@@ -227,9 +230,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.saddar[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -242,9 +245,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].educationalQualification}</span>}
+                              </span>:<span>{data.saddar[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -257,9 +260,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].address}</span>}
+                              </span>:<span>{data.saddar[0].address}</span>}
 
                             </TableCell>
 
@@ -273,9 +276,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.صدر===undefined)||(data.صدر===null)||(data.صدر==='')?<span>
+                            {(data.saddar===undefined)||(data.saddar===null)||(data.saddar==='')?<span>
                                 NULL
-                              </span>:<span>{data.صدر[0].RafaqatNo}</span>}
+                              </span>:<span>{data.saddar[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -302,9 +305,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                              {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                              {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].name}</span>}
+                              </span>:<span>{data.nazim[0].name}</span>}
 
                             </TableCell>
 
@@ -317,9 +320,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].fatherName}</span>}
+                              </span>:<span>{data.nazim[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -332,9 +335,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].email}</span>}
+                              </span>:<span>{data.nazim[0].email}</span>}
 
                             </TableCell>
 
@@ -347,9 +350,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].profession}</span>}
+                              </span>:<span>{data.nazim[0].profession}</span>}
 
                             </TableCell>
 
@@ -363,9 +366,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -378,9 +381,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -393,9 +396,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].address}</span>}
+                              </span>:<span>{data.nazim[0].address}</span>}
 
                             </TableCell>
 
@@ -409,9 +412,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظم===undefined)||(data.ناظم===null)||(data.ناظم==='')?<span>
+                            {(data.nazim===undefined)||(data.nazim===null)||(data.nazim==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظم[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -437,9 +440,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].name}</span>}
+                              </span>:<span>{data.nazim_dawat[0].name}</span>}
 
                             </TableCell>
 
@@ -452,9 +455,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].fatherName}</span>}
+                              </span>:<span>{data.nazim_dawat[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -467,9 +470,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].email}</span>}
+                              </span>:<span>{data.nazim_dawat[0].email}</span>}
 
                             </TableCell>
 
@@ -482,9 +485,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].profession}</span>}
+                              </span>:<span>{data.nazim_dawat[0].profession}</span>}
 
                             </TableCell>
 
@@ -498,9 +501,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim_dawat[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -513,9 +516,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim_dawat[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -528,9 +531,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].address}</span>}
+                              </span>:<span>{data.nazim_dawat[0].address}</span>}
 
                             </TableCell>
 
@@ -544,9 +547,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمدعوت===undefined)||(data.ناظمدعوت===null)||(data.ناظمدعوت==='')?<span>
+                            {(data.nazim_dawat===undefined)||(data.nazim_dawat===null)||(data.nazim_dawat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمدعوت[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim_dawat[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -572,9 +575,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].name}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].name}</span>}
 
                             </TableCell>
 
@@ -587,9 +590,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].fatherName}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -602,9 +605,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].email}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].email}</span>}
 
                             </TableCell>
 
@@ -617,9 +620,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].profession}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].profession}</span>}
 
                             </TableCell>
 
@@ -633,9 +636,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -648,9 +651,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -663,9 +666,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].address}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].address}</span>}
 
                             </TableCell>
 
@@ -679,9 +682,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمتربیت===undefined)||(data.ناظمتربیت===null)||(data.ناظمتربیت==='')?<span>
+                            {(data.nazim_tarbiat===undefined)||(data.nazim_tarbiat===null)||(data.nazim_tarbiat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمتربیت[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim_tarbiat[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -709,9 +712,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].name}</span>}
+                              </span>:<span>{data.nazim_membership[0].name}</span>}
 
                             </TableCell>
 
@@ -724,9 +727,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].fatherName}</span>}
+                              </span>:<span>{data.nazim_membership[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -739,9 +742,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].email}</span>}
+                              </span>:<span>{data.nazim_membership[0].email}</span>}
 
                             </TableCell>
 
@@ -754,9 +757,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].profession}</span>}
+                              </span>:<span>{data.nazim_membership[0].profession}</span>}
 
                             </TableCell>
 
@@ -770,9 +773,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim_membership[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -785,9 +788,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim_membership[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -800,9 +803,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].address}</span>}
+                              </span>:<span>{data.nazim_membership[0].address}</span>}
 
                             </TableCell>
 
@@ -816,9 +819,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمممبرشپ===undefined)||(data.ناظمممبرشپ===null)||(data.ناظمممبرشپ==='')?<span>
+                            {(data.nazim_membership===undefined)||(data.nazim_membership===null)||(data.nazim_membership==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمممبرشپ[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim_membership[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -845,9 +848,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].name}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].name}</span>}
 
                             </TableCell>
 
@@ -860,9 +863,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].fatherName}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -875,9 +878,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].email}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].email}</span>}
 
                             </TableCell>
 
@@ -890,9 +893,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].profession}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].profession}</span>}
 
                             </TableCell>
 
@@ -906,9 +909,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -921,9 +924,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -936,9 +939,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].address}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].address}</span>}
 
                             </TableCell>
 
@@ -952,9 +955,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظممالیات===undefined)||(data.ناظممالیات===null)||(data.ناظممالیات==='')?<span>
+                            {(data.nazim_maliaat===undefined)||(data.nazim_maliaat===null)||(data.nazim_maliaat==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظممالیات[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim_maliaat[0].RafaqatNo}</span>}
 
                             </TableCell>
 
@@ -981,9 +984,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].name}</span>}
+                              </span>:<span>{data.nazim_social_media[0].name}</span>}
 
                             </TableCell>
 
@@ -996,9 +999,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].fatherName}</span>}
+                              </span>:<span>{data.nazim_social_media[0].fatherName}</span>}
 
                             </TableCell>
 
@@ -1011,9 +1014,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].email}</span>}
+                              </span>:<span>{data.nazim_social_media[0].email}</span>}
 
                             </TableCell>
 
@@ -1026,9 +1029,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].profession}</span>}
+                              </span>:<span>{data.nazim_social_media[0].profession}</span>}
 
                             </TableCell>
 
@@ -1042,9 +1045,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].mobileWhatsapNo}</span>}
+                              </span>:<span>{data.nazim_social_media[0].mobileWhatsapNo}</span>}
 
                             </TableCell>
 
@@ -1057,9 +1060,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].educationalQualification}</span>}
+                              </span>:<span>{data.nazim_social_media[0].educationalQualification}</span>}
 
                             </TableCell>
 
@@ -1072,9 +1075,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].address}</span>}
+                              </span>:<span>{data.nazim_social_media[0].address}</span>}
 
                             </TableCell>
 
@@ -1088,9 +1091,9 @@ const Team = () => {
 
                             </TableCell>
                             <TableCell style={TextColor} component="th" scope="row">
-                            {(data.ناظمسوشلمیڈیا===undefined)||(data.ناظمسوشلمیڈیا===null)||(data.ناظمسوشلمیڈیا==='')?<span>
+                            {(data.nazim_social_media===undefined)||(data.nazim_social_media===null)||(data.nazim_social_media==='')?<span>
                                 NULL
-                              </span>:<span>{data.ناظمسوشلمیڈیا[0].RafaqatNo}</span>}
+                              </span>:<span>{data.nazim_social_media[0].RafaqatNo}</span>}
 
                             </TableCell>
 
