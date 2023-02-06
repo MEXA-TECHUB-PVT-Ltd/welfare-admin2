@@ -1,12 +1,9 @@
-import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import { tokens } from "../../theme";
+import { Box, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios'
-import Swal from 'sweetalert2'
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import url from "../url"
 import TableRow from '@mui/material/TableRow';
@@ -33,9 +30,6 @@ const override = {
   //   borderColor: 'red',
 }
 const color = "black"
-const imgStyle = {
-  width: '50px',
-}
 function Item(props) {
   const { sx, ...other } = props;
   return (
@@ -58,12 +52,6 @@ function Item(props) {
 const Team = () => {
   const { state } = useLocation();
 
-  
-  const headers = {
-    'Content-Type': 'application/json'
-  }
-  
- 
   //Get API Axios
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +74,7 @@ const Team = () => {
 }
   useEffect(() => {
     getAllData();
-
+    // eslint-disable-next-line
   }, []);
   return (
     <>

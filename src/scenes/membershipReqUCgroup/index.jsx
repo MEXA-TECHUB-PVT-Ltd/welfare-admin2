@@ -338,9 +338,6 @@ const Team = () => {
   }
   // Add 
   const [openAdd, setOpenAdd] = React.useState(false);
-  const handleOpenAdd = () => {
-    setOpenAdd(true);
-  }
   const handleCloseAdd = () => setOpenAdd(false);
   const submitHandler1 = () => {
     console.log(ref_no)
@@ -512,10 +509,6 @@ const Team = () => {
   }
   // Update 
   const [openUpdate, setOpenUpdate] = React.useState(false);
-  const handleOpenUpdate = (row) => {
-    // setOpenUpdate(true);
-    console.log(row)
-  }
   const handleCloseUpdate = () => setOpenUpdate(false);
   // Delete 
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -750,7 +743,6 @@ const Team = () => {
   }
   //Get API Axios
   const [data, setData] = useState([]);
-  const [dataDept, setDataDept] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const getAllData = () => {
@@ -788,23 +780,6 @@ const Team = () => {
         console.log(allData);
         setDataUnapprove(response.data);
         setLoading2(false)
-      })
-      .catch(error => console.error(`Error:${error}`));
-
-  }
-  //  const { data, loading } = useDemoData({
-  //   dataSet: 'Commodity',
-  //   rowLength: 4,
-  //   maxColumns: 6,
-  // });
-  const getAllDataDept = () => {
-    axios.get(`${url}get-all`)
-      .then((response) => {
-        const allData = response.data;
-        console.log(allData);
-        setDataDept(response.data);
-        // setimagesdata(response.data.images);
-
       })
       .catch(error => console.error(`Error:${error}`));
 
@@ -847,7 +822,6 @@ const Team = () => {
     getAllData();
     getAllDataUnapprove();
     getAllDataApprove();
-    getAllDataDept();
     getAllDataDistrict();
     getAllDataPP();
     getAllDataUC();
